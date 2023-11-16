@@ -9,7 +9,7 @@
 
 
 html {
-    background-image: url('/css/img/release-171.jpg');
+    background-image: url('./css/img/release-171.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
