@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&family=Sunflower:wght@300;500&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Sunflower', sans-serif;
+}
+
+
+html {
+    background-image: url('/css/img/release-171.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    
+}
+
+.formulary {
+    margin: 100px 0 30px;
+}
+
+.formulary .input-area {
+   
+    padding: 15px;
+
+}
+
+.formulary input  {
+    font-size: 20px;
+    text-align: center;
+    width: 200px;
+    height: 40px;
+    border: 2px solid;
+    border-radius: 5px;
+}
+
+
+.buttons .save-btn, .remove-btn{
+    padding: 10px;
+    border-radius: 5px;
+    
+}
+
+.buttons {
+    margin-top: 15px;
+}
+
+.buttons .save-btn {
+    margin-right: 15px;
+}
+
+.buttons .save-btn, .remove-btn {
+    width: 83px;
+}
+
+.reference-panel {
+    margin: 0 auto;
+    text-align: center;
+    width: 325px;
+    padding: 20px;
+   
+    border-radius: 5px;
+    background-color: #EA612D;
+    opacity: 0.8;
+ 
+}
+
+.reference-panel .ref {
+    font-size: 20px;
+    margin: 20px 0 20px;
+}
+
+
+.reference-panel .info-results {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    font-weight: 300;
+    padding: 10px;
+    border:  2px solid #000;
+    border-radius: 8px;
+    width: 100%;
+    color: #fff;
+    background-color: #696969;
+}
+
+.reference-panel .separator {
+    background-color: #000;
+    width: 1.5px;
+    height: 30px;
+}
+
+.reference-panel .total-sku, .total-ref, .total {
+   
+    font-size: 15px;
+}
+
+
+.reference-panel.hidden {
+    display: none;
+}
+
+.save-btn {
+    background-color: #3CB371;
+}
+
+.save-btn, .remove-btn {
+    cursor: pointer;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
+
+.footer div {
+    font-weight: 300;
+    color: #fff;
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

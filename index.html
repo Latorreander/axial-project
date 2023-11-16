@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="./css/style.css" />
+        <title>Axial-Project</title>
+    </head>
+    <body>
+        <div class="formulary">
+            <form action="">
+            
+                <div class="input-area">
+                    <input type="text" id="reference" placeholder="N° Referência" maxlength="10">
+                </div>
+                
+                <div class="input-area">
+                    <input type="number" id="quantity" placeholder="Quantidade" maxlength="3">
+                </div>
+                
+                <div class="buttons">
+                    <button class="save-btn" type="button">SALVAR</button>
+                    <button class="remove-btn" type="button"> REMOVER</button>
+                </div>
+               
+                
+                
+            </form>
+        </div>
+       
+
+        <div class="reference-panel hidden">
+            <p>ÚLTIMA REFERÊNCIA SALVA</p>
+                <div class="ref"></div>
+           
+
+            <div class="info-results">
+                <div class="total-sku"></div>
+                <div class="separator"></div>
+                <div class="total-ref"></div>
+                <div class="separator"></div>
+                <div class="total"></div>
+            </div>
+    
+        </div>
+
+        <footer class="footer">
+
+            <div><p>®All Rights reserved by Anderson Latorre</p></div>
+    
+        </footer>
+    
+
+        <script src="./app.js"></script>
+    </body>
+</html>
