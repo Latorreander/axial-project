@@ -82,7 +82,7 @@ saveBtn.addEventListener("click", () => {
     );
      
 
-ulRef.innerHTML += `<li><strong>${reference.Reference}  »»»»  ${reference.Quantity}Pçs</strong></li>`;
+ulRef.innerHTML += `<li>${reference.Reference}  »»»»  ${reference.Quantity}Pçs</li>`;
 console.log(ulRef)    // arrReferences.forEach((item) => {
     //     ulRef.innerHTML += `<li><strong>${item.Reference}  »»»»  ${item.Quantity}Pçs</strong></li>`;
     // });

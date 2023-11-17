@@ -1,0 +1,5 @@
+@media(max-width: 424px){
+    body {
+        background-size: cover;
+    }
+}
