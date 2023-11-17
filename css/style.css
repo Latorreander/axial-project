@@ -63,7 +63,6 @@ html {
     text-align: center;
     width: 325px;
     padding: 20px;
-   
     border-radius: 5px;
     background-color: #EA612D;
     opacity: 0.8;
@@ -73,6 +72,15 @@ html {
 .reference-panel .ref {
     font-size: 20px;
     margin: 20px 0 20px;
+}
+
+.reference-panel ul {
+    margin: 0 auto;
+    width: 220px;
+}
+
+.reference-panel li {
+    list-style-type: square;
 }
 
 
@@ -101,6 +109,10 @@ html {
    
     font-size: 15px;
 }
+
+
+
+
 
 
 .reference-panel.hidden {
