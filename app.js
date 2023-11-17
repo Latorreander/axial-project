@@ -8,8 +8,6 @@ const skuInfo = document.querySelector(".total-sku");
 const refInfo = document.querySelector(".total-ref");
 const removeBtn = document.querySelector(".remove-btn");
 
-
-
 const arrReferences = [];
 let totalSku = 0;
 
@@ -26,9 +24,6 @@ window.addEventListener('beforeunload', (e) => {
 
 })
 
-
-
-
 removeBtn.disabled = true;
 
 saveBtn.addEventListener("click", () => {
@@ -42,7 +37,7 @@ saveBtn.addEventListener("click", () => {
 
     // removeBtn.disabled = false;
 
-    reference = { Reference: referenceValue, Quantity: Number(quantityValue) };
+    reference = { Reference: referenceValue.toUpperCase(), Quantity: Number(quantityValue) };
 
     const referenceToFind = referenceValue;
 
