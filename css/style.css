@@ -83,7 +83,7 @@ body {
 
 .reference-panel .info-results {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     text-align: center;
     margin: 0 auto;

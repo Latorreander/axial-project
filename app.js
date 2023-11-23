@@ -1,3 +1,5 @@
+import { monitorInputs } from "./functions.js";
+
 const referenceInput = document.getElementById("reference");
 const quantityInput = document.getElementById("quantity");
 const saveBtn = document.querySelector(".save-btn");
@@ -7,6 +9,11 @@ const totalInfo = document.querySelector(".total");
 const skuInfo = document.querySelector(".total-sku");
 const refInfo = document.querySelector(".total-ref");
 const removeBtn = document.querySelector(".remove-btn");
+
+
+const print = () => {
+    window.print()
+}
 
 const arrReferences = [];
 let totalSku = 0;
@@ -27,19 +34,14 @@ window.addEventListener('beforeunload', (e) => {
 removeBtn.disabled = true;
 
 saveBtn.addEventListener("click", () => {
-
-    referenceInput.focus()
     
+    referenceInput.focus()
     panelRef.classList.remove("hidden");
+    
+    monitorInputs()
 
-    const referenceValue = referenceInput.value;
-    const quantityValue = quantityInput.value;
-
-    // removeBtn.disabled = false;
-
-    reference = { Reference: referenceValue.toUpperCase(), Quantity: Number(quantityValue) };
-
-    const referenceToFind = referenceValue;
+    let referenceValue = referenceInput.value;
+    let quantityValue = quantityInput.value;
 
     if (referenceInput.value === "") {
         panelRef.classList.add("hidden");
@@ -55,17 +57,32 @@ saveBtn.addEventListener("click", () => {
         return;
     }
 
+    if (quantityInput.value < 1){
+        panelRef.classList.add("hidden");
+        removeBtn.disabled = true;
+        alert('DIGITE UM VALOR MAIOR QUE ZERO!')
+        return
+    }
+
+
     if (referenceValue.length < 6) {
         panelRef.classList.add("hidden");
         removeBtn.disabled = true;
         alert("REFERÊNCIA INVÁLIDA!");
-        return;
+        return
     }
+    
+    referenceInput.value = '';
+    quantityInput.value = '';
+    
+    const oP = { Reference: referenceValue.toUpperCase(), Quantity: Number(quantityValue) };
+    
 
-    referenceInput.value = "";
-    quantityInput.value = "";
+    // removeBtn.disabled = false;
+    
 
-    index = arrReferences.findIndex((ref) => ref.Reference === referenceToFind);
+    const referenceToFind = referenceValue;
+    const index = arrReferences.findIndex((ref) => ref.Reference === referenceToFind);
     console.log(index);
 
     if (index === -1) {
@@ -74,140 +91,21 @@ saveBtn.addEventListener("click", () => {
         totalSku = totalSku;
     }
 
-    arrReferences.push(reference);
-
+    arrReferences.push(oP);
+    
     const totalQuantity = arrReferences.reduce(
         (totalQuantity, value) => totalQuantity + value.Quantity,
         0
-    );
-     
-
-ulRef.innerHTML += `<li>${reference.Reference}  »»»»  ${reference.Quantity}Pçs</li>`;
-console.log(ulRef)    // arrReferences.forEach((item) => {
-    //     ulRef.innerHTML += `<li><strong>${item.Reference}  »»»»  ${item.Quantity}Pçs</strong></li>`;
-    // });
+        );
+        
+    ulRef.innerHTML += `<li>${oP.Reference}  »»»»  ${oP.Quantity}Pçs</li>`;
+  
 
     totalInfo.innerHTML = `<span>TOTAL: ${totalQuantity}</span>`;
     skuInfo.innerHTML = `<span>SKU: ${totalSku}</span>`;
     refInfo.innerHTML = `<span>OP: ${arrReferences.length}</span>`;
-
-    
 });
 
-// removeBtn.addEventListener('click', () => {
-
-//     const totalQuantity = arrReferences.reduce(
-//         (totalQuantity, value) => totalQuantity + value.Quantity,
-//         0
-//     );
-  
-//     lastRef = arrReferences[arrReferences.length -1]
-
-    
-//     differenceQuantity = totalQuantity - lastRef.Quantity
-    
-//     console.log(differenceQuantity)
-//     arrReferences.pop()
+export {referenceInput, panelRef, removeBtn, quantityInput}
 
 
-//     // for (let i = 0; i < arrReferences.length; i++) {
-//     //     const ref = arrReferences[i];
-//     //     console.log(ref)
-        
-//     //     if(lastRef.Reference === ref.Reference){
-//     //         totalSku = totalSku
-//     //     }else {
-//     //         totalSku -=1
-//     //     }
-       
-  
-//     // }
-
-
-//     arrReferences.forEach((ref) => {
-
-
-//         if(lastRef.Reference === ref.Reference){
-//         console.log(' já existe a referencia no array')
-//         totalSku = totalSku
-
-//         }else{
-//         console.log('não existe')
-//         totalSku -1
-//         }
-    
-//     })
-
-
-//     if(arrReferences.length === 0){
-//         totalSku = 0
-//         panelRef.classList.add("hidden");
-
-//     }
-
-//     // ulRef.innerHTML = `<li><strong>${lastRef.Reference}  »»»»  ${lastRef.Quantity}Pçs</strong></li>`;
-
-//     totalInfo.innerHTML = `<span>TOTAL: ${differenceQuantity}</span>`;
-//     skuInfo.innerHTML = `<span>SKU: ${totalSku}</span>`;
-//     refInfo.innerHTML = `<span>OP: ${arrReferences.length}</span>`;
-   
-
-// })
-
-
-
-
-// removeBtn.addEventListener("click", () => {
-//     const response = confirm("DESEJA REMOVER A ÚLTIMA REFERÊNCIA?");
-
-//     if (response == false) {
-//         return;
-//     }
-
-//     lastRef = arrReferences[arrReferences.length -1].Reference
-
-//  for (let i = 0; i < arrReferences.length; i++) {
-//     const element = arrReferences[i].Reference;
-
-//     removedRef = arrReferences.pop();
-
-//     if(element.includes()){
-//         console.log('tinha uma ref igual')
-//     }else{console.log('não tinha uma ref igual')}
-
-//     if(element.Reference === lastRef ){
-//         console.log('tinha duas ref iguais')
-
-//     }else if(element.Reference !== lastRef)
-//     {totalSku -= 1}
-
-//  }
-
-//     if(arrReferences.includes(lastReference)){
-//         totalSku -= 1
-//     }else {
-//         totalSku = totalSku
-//     }
-
-//     arrReferences.forEach((item) => {
-//         ulRef.innerHTML = `<span>${item.Reference} »»»» ${item.Quantity}</span>`;
-//     });
-
-//     const totalQuantity = arrReferences.reduce(
-//         (totalQuantity, value) => totalQuantity + value.Quantity,
-//         0
-//     );
-
-//     totalInfo.innerHTML = `<span>TOTAL: ${totalQuantity}</span>`;
-//     skuInfo.innerHTML = `<span>SKU: ${totalSku}</span>`;
-//     refInfo.innerHTML = `<span>REF: ${arrReferences.length}</span>`;
-
-//     if (totalQuantity === 0) {
-//         panelRef.classList.add("hidden");
-//         ulRef.innerHTML = "";
-//         totalInfo.innerHTML = "";
-
-//         skuInfo.innerHTML = '';
-//         refInfo.innerHTML = '';
-//     }
-// });
