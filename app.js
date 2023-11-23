@@ -11,10 +11,6 @@ const refInfo = document.querySelector(".total-ref");
 const removeBtn = document.querySelector(".remove-btn");
 
 
-const print = () => {
-    window.print()
-}
-
 const arrReferences = [];
 let totalSku = 0;
 
