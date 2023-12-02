@@ -75,7 +75,7 @@ body {
     display: none;
 }
 
-.logo-spinner {
+.logo-spinner img {
     -webkit-animation: spin 0.7s forwards infinite;
     -moz-animation: spin 0.7s forwards infinite;
     animation: spin 0.7s forwards infinite;
