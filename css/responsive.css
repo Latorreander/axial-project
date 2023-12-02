@@ -1,5 +1,9 @@
-@media(max-width: 424px){
+/* @media(max-width: 426px){
     body {
+        background-image: url('./img/release-10.png');
         background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
     }
-}
+} */

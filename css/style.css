@@ -7,11 +7,16 @@
     font-family: "Sunflower", sans-serif;
 }
 
+html {
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
 body {
     background-image: url("./img/release-171.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center center;
     background-attachment: fixed;
     width: 100%;
     height: 100%;
@@ -44,6 +49,7 @@ body {
 
 .buttons {
     margin-top: 15px;
+    margin: 0 auto;
 }
 
 .buttons .save-btn {
@@ -58,11 +64,46 @@ body {
 .reference-panel {
     margin: 0 auto;
     text-align: center;
-    width: 400px;
+    width: 450px;
     padding: 20px;
     border-radius: 5px;
     background-color: #ea612d;
     opacity: 0.9;
+}
+
+.logo-spinner.hidden {
+    display: none;
+}
+
+.logo-spinner {
+    -webkit-animation: spin 0.7s forwards infinite;
+    -moz-animation: spin 0.7s forwards infinite;
+    animation: spin 0.7s forwards infinite;
+}
+
+.logo-spinner {
+    margin-bottom: 20px;
+}
+
+.logo-spinner img {
+    width: 50px;
+}
+
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
 
 .reference-panel .ref {
@@ -74,11 +115,24 @@ body {
 .reference-panel ul {
     padding: 8px;
     margin: 0 auto;
-    width: 220px;
+    width: 250px;
 }
 
 .reference-panel li {
+    display: flex;
+    align-items: center;
+    align-items: center;
     list-style-type: square;
+    margin: 0 0 7px;
+}
+
+.reference-panel input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+}
+
+.reference-panel label {
+    cursor: pointer;
 }
 
 .reference-panel .info-results {

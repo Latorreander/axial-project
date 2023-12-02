@@ -1,5 +1,3 @@
-import { monitorInputs } from "./functions.js";
-
 const referenceInput = document.getElementById("reference");
 const quantityInput = document.getElementById("quantity");
 const saveBtn = document.querySelector(".save-btn");
@@ -9,76 +7,52 @@ const totalInfo = document.querySelector(".total");
 const skuInfo = document.querySelector(".total-sku");
 const refInfo = document.querySelector(".total-ref");
 const removeBtn = document.querySelector(".remove-btn");
-
+const mediaInfo = document.querySelector(".media");
+const logoDiv = document.querySelector(".logo-spinner");
 
 const arrReferences = [];
 let totalSku = 0;
 
 document.addEventListener("keypress", (e) => {
-    
     if (e.keyCode === 13) {
         saveBtn.click();
     }
 });
 
-window.addEventListener('beforeunload', (e) => {
-    e.preventDefault()
-    e.returnValue = '';
-
-})
+window.addEventListener("beforeunload", (e) => {
+    e.preventDefault();
+    e.returnValue = "";
+});
 
 removeBtn.disabled = true;
 
 saveBtn.addEventListener("click", () => {
-    
-    referenceInput.focus()
-    panelRef.classList.remove("hidden");
-    
-    monitorInputs()
+    logoDiv.classList.remove("hidden");
 
-    let referenceValue = referenceInput.value;
+    setTimeout(() => {
+        logoDiv.classList.add("hidden");
+        panelRef.classList.remove("hidden");
+    }, 1300);
+
+    referenceInput.focus();
+
     let quantityValue = quantityInput.value;
+    let referenceValue = referenceInput.value;
 
-    if (referenceInput.value === "") {
-        panelRef.classList.add("hidden");
-        removeBtn.disabled = true;
-        alert("DIGITE UMA REFERÊNCIA!");
-        return;
-    }
+    referenceInput.value = "";
+    quantityInput.value = "";
 
-    if (quantityInput.value === "") {
-        panelRef.classList.add("hidden");
-        removeBtn.disabled = true;
-        alert("DIGITE A QUANTIDADE DE PEÇAS!");
-        return;
-    }
-
-    if (quantityInput.value < 1){
-        panelRef.classList.add("hidden");
-        removeBtn.disabled = true;
-        alert('DIGITE UM VALOR MAIOR QUE ZERO!')
-        return
-    }
-
-
-    if (referenceValue.length < 6) {
-        panelRef.classList.add("hidden");
-        removeBtn.disabled = true;
-        alert("REFERÊNCIA INVÁLIDA!");
-        return
-    }
-    
-    referenceInput.value = '';
-    quantityInput.value = '';
-    
-    const oP = { Reference: referenceValue.toUpperCase(), Quantity: Number(quantityValue) };
-    
+    const oP = {
+        Reference: referenceValue.toUpperCase(),
+        Quantity: Number(quantityValue),
+    };
 
     // removeBtn.disabled = false;
-    
 
     const referenceToFind = referenceValue;
-    const index = arrReferences.findIndex((ref) => ref.Reference === referenceToFind);
+    const index = arrReferences.findIndex(
+        (ref) => ref.Reference === referenceToFind
+    );
     console.log(index);
 
     if (index === -1) {
@@ -88,20 +62,20 @@ saveBtn.addEventListener("click", () => {
     }
 
     arrReferences.push(oP);
-    
+
     const totalQuantity = arrReferences.reduce(
         (totalQuantity, value) => totalQuantity + value.Quantity,
         0
-        );
-        
-    ulRef.innerHTML += `<li>${oP.Reference}  »»»»  ${oP.Quantity}Pçs</li>`;
-  
+    );
+
+    ulRef.innerHTML += `<li><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs</label></li>`;
 
     totalInfo.innerHTML = `<span>TOTAL: ${totalQuantity}</span>`;
     skuInfo.innerHTML = `<span>SKU: ${totalSku}</span>`;
     refInfo.innerHTML = `<span>OP: ${arrReferences.length}</span>`;
+    mediaInfo.innerHTML = `<span>MEDIA: ${Math.floor(
+        totalQuantity / arrReferences.length
+    )}</span>`;
 });
 
-export {referenceInput, panelRef, removeBtn, quantityInput}
-
-
+export { quantityInput, referenceInput };
