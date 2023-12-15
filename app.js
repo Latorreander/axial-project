@@ -1,8 +1,10 @@
+import { showReferenceSaved } from "./services.js";
+
 const referenceInput = document.getElementById("reference");
 const quantityInput = document.getElementById("quantity");
 const saveBtn = document.querySelector(".save-btn");
 const panelRef = document.querySelector(".reference-panel");
-const ulRef = document.querySelector(".ul");
+const refList = document.querySelector(".list");
 const totalInfo = document.querySelector(".total");
 const skuInfo = document.querySelector(".total-sku");
 const refInfo = document.querySelector(".total-ref");
@@ -10,8 +12,7 @@ const removeBtn = document.querySelector(".remove-btn");
 const mediaInfo = document.querySelector(".media");
 const logoDiv = document.querySelector(".logo-spinner");
 
-const arrReferences = [];
-let totalSku = 0;
+
 
 document.addEventListener("keypress", (e) => {
     if (e.keyCode === 13) {
@@ -27,55 +28,44 @@ window.addEventListener("beforeunload", (e) => {
 removeBtn.disabled = true;
 
 saveBtn.addEventListener("click", () => {
+    
     logoDiv.classList.remove("hidden");
 
-    setTimeout(() => {
-        logoDiv.classList.add("hidden");
-        panelRef.classList.remove("hidden");
-    }, 1300);
-
-    referenceInput.focus();
-
-    let quantityValue = quantityInput.value;
     let referenceValue = referenceInput.value;
+    let quantityValue = quantityInput.value;
 
-    referenceInput.value = "";
-    quantityInput.value = "";
-
-    const oP = {
-        Reference: referenceValue.toUpperCase(),
-        Quantity: Number(quantityValue),
-    };
-
-    // removeBtn.disabled = false;
-
-    const referenceToFind = referenceValue;
-    const index = arrReferences.findIndex(
-        (ref) => ref.Reference === referenceToFind
-    );
-    console.log(index);
-
-    if (index === -1) {
-        totalSku += 1;
-    } else {
-        totalSku = totalSku;
+    if (referenceValue === "") {
+        panelRef.classList.add("hidden");
+        removeBtn.disabled = true;
+        alert("DIGITE UMA REFERÊNCIA!");
+        return;
     }
 
-    arrReferences.push(oP);
+    if (quantityValue === "") {
+        panelRef.classList.add("hidden");
+        removeBtn.disabled = true;
+        alert("DIGITE A QUANTIDADE DE PEÇAS!");
+        return;
+    }
 
-    const totalQuantity = arrReferences.reduce(
-        (totalQuantity, value) => totalQuantity + value.Quantity,
-        0
-    );
+    if (quantityValue < 1){
+        panelRef.classList.add("hidden");
+        removeBtn.disabled = true;
+        alert('DIGITE UM VALOR MAIOR QUE ZERO!')
+        return
+    }
 
-    ulRef.innerHTML += `<li><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs</label></li>`;
+    if (referenceValue.length < 6) {
+        panelRef.classList.add("hidden");
+        removeBtn.disabled = true;
+        alert("REFERÊNCIA INVÁLIDA!");
+        return
+    }
+    
 
-    totalInfo.innerHTML = `<span>TOTAL: ${totalQuantity}</span>`;
-    skuInfo.innerHTML = `<span>SKU: ${totalSku}</span>`;
-    refInfo.innerHTML = `<span>OP: ${arrReferences.length}</span>`;
-    mediaInfo.innerHTML = `<span>MEDIA: ${Math.floor(
-        totalQuantity / arrReferences.length
-    )}</span>`;
+    showReferenceSaved()
+
+   
 });
 
-export { quantityInput, referenceInput };
+export { quantityInput, referenceInput, panelRef, removeBtn, logoDiv, refList,totalInfo, skuInfo, refInfo, mediaInfo };

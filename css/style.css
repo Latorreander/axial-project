@@ -76,9 +76,7 @@ body {
 }
 
 .logo-spinner img {
-    -webkit-animation: spin 0.7s forwards infinite;
-    -moz-animation: spin 0.7s forwards infinite;
-    animation: spin 0.7s forwards infinite;
+    animation: spin 0.7s backwards infinite;
 }
 
 .logo-spinner {
@@ -89,16 +87,6 @@ body {
     width: 50px;
 }
 
-@-moz-keyframes spin {
-    100% {
-        -moz-transform: rotate(360deg);
-    }
-}
-@-webkit-keyframes spin {
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
-}
 @keyframes spin {
     100% {
         -webkit-transform: rotate(360deg);
@@ -113,9 +101,10 @@ body {
 }
 
 .reference-panel ul {
+    font-size: 15px;
     padding: 8px;
     margin: 0 auto;
-    width: 250px;
+    width: 270px;
 }
 
 .reference-panel li {
@@ -124,6 +113,10 @@ body {
     align-items: center;
     list-style-type: square;
     margin: 0 0 7px;
+}
+
+.reference-panel .not-contain.hidden{
+    display: none;
 }
 
 .reference-panel input[type="checkbox"] {
