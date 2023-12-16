@@ -68,9 +68,11 @@ const showReferenceSaved = () => {
             console.log(notContainClass)
 
             notContainClass.classList.add('hidden')
-            
-            
+           
+
             refList.innerHTML += `<li class='contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs <span>(${refCount})</span></label></li>`;
+            
+            
         
 
         }
