@@ -29,7 +29,7 @@ if($conn->connect_error){
 $statement = $conn->prepare("INSERT INTO references_saved (referencia, quantidade, data, hora) VALUES (?,?,?,?)");
 
 $statement->bind_param("ssss", $reference, $quantity, $date, $hour);
-exit(var_dump($reference));
+(var_dump($reference));
 
 
 if($statement->execute()){
