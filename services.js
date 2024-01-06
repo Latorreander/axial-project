@@ -13,8 +13,8 @@ const showReferenceSaved = () => {
     let quantityValue = quantityInput.value;
     let referenceValue = referenceInput.value;
     
-    // referenceInput.value = "";
-    // quantityInput.value = "";
+    referenceInput.value = "";
+    quantityInput.value = "";
 
     const oP = {
         Reference: referenceValue.toUpperCase(),
