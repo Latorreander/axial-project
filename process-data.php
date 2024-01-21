@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 date_default_timezone_set('America/Sao_Paulo');
 
@@ -41,4 +41,4 @@ if($statement->execute()){
 $statement->close();
 $conn->close();
 
-?>
+?> -->
