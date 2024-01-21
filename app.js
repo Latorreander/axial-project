@@ -20,10 +20,6 @@ document.addEventListener("keypress", (e) => {
     }
 });
 
-window.addEventListener("beforeunload", (e) => {
-    e.preventDefault();
-    e.returnValue = "";
-});
 
 removeBtn.disabled = true;
 
@@ -33,6 +29,7 @@ saveBtn.addEventListener("click", () => {
 
     let referenceValue = referenceInput.value;
     let quantityValue = quantityInput.value;
+    
 
     if (referenceValue === "") {
         panelRef.classList.add("hidden");
