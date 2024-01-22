@@ -21,7 +21,7 @@ document.addEventListener("keypress", (e) => {
 });
 
 
-// removeBtn.disabled = true;
+removeBtn.disabled = true;
 
 saveBtn.addEventListener("click", () => {
     

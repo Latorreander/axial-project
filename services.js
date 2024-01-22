@@ -57,7 +57,7 @@ const showReferenceSaved = () => {
             
             totalSku += 1;
            
-            refList.innerHTML += `${SavedRefNotCount}`
+            refList.innerHTML += `${savedRefNotCount}`
             
         } else {
 
@@ -73,45 +73,37 @@ const showReferenceSaved = () => {
         }
 
   
-        for (let i = 0; i < arrReferences.length; i++) {
+        // for (let i = 0; i < arrReferences.length; i++) {
            
-            if (referenceToFind === arrReferences[i].Reference) {
+        //     if (referenceToFind === arrReferences[i].Reference) {
 
-                console.log('já existe essa referência')
+        //         console.log('já existe essa referência')
             
-                // const SavedRefCount = `<li class='contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs <span>(${refCount})</span></label></li>`;
+        //         // const SavedRefCount = `<li class='contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs <span>(${refCount})</span></label></li>`;
            
-            }
+        //     }
    
-        }
+        // }
 
 
             totalSku
            
-=======
->>>>>>> c070d6b545c6c36789482634c1b3828528f15854
+
 
             
-        for (let i = 0; i < arrReferences.length; i++) {
+        // for (let i = 0; i < arrReferences.length; i++) {
            
-            if (referenceToFind === arrReferences[i].Reference) {
+        //     if (referenceToFind === arrReferences[i].Reference) {
             
-                const SavedRefCount = `<li class='contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs <span>(${refCount})</span></label></li>`;
+        //         const SavedRefCount = `<li class='contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs <span>(${refCount})</span></label></li>`;
         
                            
-                   refList.innerHTML += `${SavedRefCount}`
+        //            refList.innerHTML += `${SavedRefCount}`
                 
-            }
+        //     }
    
-        }
+        // }
 
-<<<<<<< HEAD
-=======
-            totalSku
-           
-        
-
->>>>>>> c070d6b545c6c36789482634c1b3828528f15854
         
         arrReferences.push(oP);
 
