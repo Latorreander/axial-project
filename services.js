@@ -57,16 +57,10 @@ const showReferenceSaved = () => {
             
             totalSku += 1;
            
-
-<<<<<<< HEAD
-            refList.innerHTML += `${savedRefNotCount}`
-=======
-            
             refList.innerHTML += `${SavedRefNotCount}`
             
         } else {
-<<<<<<< HEAD
->>>>>>> 8b72f16bb5e3936d90c08bacedcebcb90399e5d1
+
 
         }
 
