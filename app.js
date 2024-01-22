@@ -3,7 +3,7 @@ import { showReferenceSaved } from "./services.js";
 const referenceInput = document.getElementById("reference");
 const quantityInput = document.getElementById("quantity");
 const saveBtn = document.querySelector(".save-btn");
-const panelRef = document.querySelector(".reference-panel");
+const refPanel = document.querySelector(".reference-panel");
 const refList = document.querySelector(".list");
 const totalInfo = document.querySelector(".total");
 const skuInfo = document.querySelector(".total-sku");
@@ -21,7 +21,7 @@ document.addEventListener("keypress", (e) => {
 });
 
 
-removeBtn.disabled = true;
+// removeBtn.disabled = true;
 
 saveBtn.addEventListener("click", () => {
     
@@ -34,28 +34,28 @@ saveBtn.addEventListener("click", () => {
     
 
     if (referenceValue === "") {
-        panelRef.classList.add("hidden");
+        refPanel.classList.add("hidden");
         removeBtn.disabled = true;
         alert("DIGITE UMA REFERÊNCIA!");
         return;
     }
 
     if (quantityValue === "") {
-        panelRef.classList.add("hidden");
+        refPanel.classList.add("hidden");
         removeBtn.disabled = true;
         alert("DIGITE A QUANTIDADE DE PEÇAS!");
         return;
     }
 
     if (quantityValue < 1){
-        panelRef.classList.add("hidden");
+        refPanel.classList.add("hidden");
         removeBtn.disabled = true;
         alert('DIGITE UM VALOR MAIOR QUE ZERO!')
         return
     }
 
     if (referenceValue.length < 6) {
-        panelRef.classList.add("hidden");
+        refPanel.classList.add("hidden");
         removeBtn.disabled = true;
         alert("REFERÊNCIA INVÁLIDA!");
         return
@@ -63,8 +63,8 @@ saveBtn.addEventListener("click", () => {
     
 
     showReferenceSaved()
-
-   
 });
 
-export { quantityInput, referenceInput, panelRef, removeBtn, logoDiv, refList,totalInfo, skuInfo, refInfo, mediaInfo };
+
+
+export { quantityInput, referenceInput, refPanel, removeBtn, logoDiv, refList,totalInfo, skuInfo, refInfo, mediaInfo };

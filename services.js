@@ -1,4 +1,4 @@
-import { quantityInput, referenceInput, panelRef, removeBtn, logoDiv, refList, totalInfo, skuInfo, refInfo, mediaInfo } from "./app.js";
+import { quantityInput, referenceInput, refPanel, removeBtn, logoDiv, refList, totalInfo, skuInfo, refInfo, mediaInfo } from "./app.js";
 
 
 
@@ -21,7 +21,7 @@ const showReferenceSaved = () => {
         Quantity: Number(quantityValue),
     };
 
-    // removeBtn.disabled = false;
+    removeBtn.disabled = false;
 
     const referenceToFind = referenceValue;
 
@@ -32,7 +32,7 @@ const showReferenceSaved = () => {
     setTimeout(() => {
         
         logoDiv.classList.add("hidden");
-        panelRef.classList.remove("hidden");
+        refPanel.classList.remove("hidden");
 
         let refCount = 1;
 
@@ -49,41 +49,43 @@ const showReferenceSaved = () => {
         const notContainInArr = index === -1;
         const containInArr = index !== -1;
 
-        // let SavedRefNotCount = `<li class='not-contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs </label></li>`;
+
    
-
- 
-
-        
         if (notContainInArr) {
+            const savedRefNotCount = `<li class='not-contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs </label></li>`;
             
-            const SavedRefNotCount = `<li class='not-contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs </label></li>`;
             
             totalSku += 1;
            
 
-            
-            refList.innerHTML += `${SavedRefNotCount}`
-            
-        } else {
+            refList.innerHTML += `${savedRefNotCount}`
 
-            
+        }
+
+         if(containInArr){
+
+            const savedRefCount = `<li class='contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs <span>(${refCount})</span></label></li>`;
+
+
+            refList.innerHTML += `${savedRefCount}`
+        }
+
+  
         for (let i = 0; i < arrReferences.length; i++) {
            
             if (referenceToFind === arrReferences[i].Reference) {
+
+                console.log('já existe essa referência')
             
-                const SavedRefCount = `<li class='contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs <span>(${refCount})</span></label></li>`;
-        
-                           
-                   refList.innerHTML += `${SavedRefCount}`
-                
+                // const SavedRefCount = `<li class='contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs <span>(${refCount})</span></label></li>`;
+           
             }
    
         }
 
             totalSku
            
-        }
+        
 
         
         arrReferences.push(oP);
