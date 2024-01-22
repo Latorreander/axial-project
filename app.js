@@ -29,8 +29,6 @@ saveBtn.addEventListener("click", () => {
 
     let referenceValue = referenceInput.value;
     let quantityValue = quantityInput.value;
-    console.log(referenceValue)
-    console.log(quantityValue)
     
 
     if (referenceValue === "") {

@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
+    "liveServer.settings.port": 5502
+=======
     "liveServer.settings.port": 5501,
     "php.validate.executablePath": ""
+>>>>>>> c070d6b545c6c36789482634c1b3828528f15854
 }

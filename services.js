@@ -58,7 +58,15 @@ const showReferenceSaved = () => {
             totalSku += 1;
            
 
+<<<<<<< HEAD
             refList.innerHTML += `${savedRefNotCount}`
+=======
+            
+            refList.innerHTML += `${SavedRefNotCount}`
+            
+        } else {
+<<<<<<< HEAD
+>>>>>>> 8b72f16bb5e3936d90c08bacedcebcb90399e5d1
 
         }
 
@@ -83,10 +91,33 @@ const showReferenceSaved = () => {
    
         }
 
+
+            totalSku
+           
+=======
+>>>>>>> c070d6b545c6c36789482634c1b3828528f15854
+
+            
+        for (let i = 0; i < arrReferences.length; i++) {
+           
+            if (referenceToFind === arrReferences[i].Reference) {
+            
+                const SavedRefCount = `<li class='contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs <span>(${refCount})</span></label></li>`;
+        
+                           
+                   refList.innerHTML += `${SavedRefCount}`
+                
+            }
+   
+        }
+
+<<<<<<< HEAD
+=======
             totalSku
            
         
 
+>>>>>>> c070d6b545c6c36789482634c1b3828528f15854
         
         arrReferences.push(oP);
 
