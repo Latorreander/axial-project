@@ -20,12 +20,12 @@ document.addEventListener("keypress", (e) => {
     }
 });
 
-
 removeBtn.disabled = true;
 
 saveBtn.addEventListener("click", () => {
     
     logoDiv.classList.remove("hidden");
+   
 
     let referenceValue = referenceInput.value;
     let quantityValue = quantityInput.value;
@@ -65,4 +65,4 @@ saveBtn.addEventListener("click", () => {
 
 
 
-export { quantityInput, referenceInput, refPanel, removeBtn, logoDiv, refList,totalInfo, skuInfo, refInfo, mediaInfo };
+export { quantityInput, referenceInput, refPanel, removeBtn, logoDiv, refList,totalInfo, skuInfo, refInfo, mediaInfo};

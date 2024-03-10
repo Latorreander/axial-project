@@ -61,15 +61,6 @@ body {
     width: 83px;
 }
 
-.reference-panel {
-    margin: 0 auto;
-    text-align: center;
-    width: 500px;
-    padding: 20px;
-    border-radius: 5px;
-    background-color: #ea612d;
-    opacity: 0.9;
-}
 
 .logo-spinner.hidden {
     display: none;
@@ -94,6 +85,16 @@ body {
     }
 }
 
+.reference-panel {
+    margin: 0 auto 35px;
+    text-align: center;
+    width: 500px;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #ea612d;
+    opacity: 0.9;
+}
+
 .reference-panel .ref {
     background-color: #696969;
     font-size: 17px;
@@ -101,23 +102,24 @@ body {
 }
 
 .reference-panel ul {
+    
+    text-align: center;
     font-size: 15px;
     padding: 8px;
     margin: 0 auto;
     width: 290px;
 }
 
-
-
 .reference-panel li {
     display: flex;
     align-items: center;
     align-items: center;
-    list-style-type: square;
-    margin: 0 0 7px;
+    /* list-style-type: square; */
+    margin: 0  7px;
 }
 
-.reference-panel .not-contain.hidden{
+
+.reference-panel .not-contain.hidden {
     display: none;
 }
 
@@ -169,6 +171,7 @@ body {
 .remove-btn {
     cursor: pointer;
 }
+
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

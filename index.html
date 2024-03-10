@@ -12,7 +12,8 @@
 
         <main>
             <div class="formulary">
-                <form>
+                
+                <form action="process-data.php" method="post">
                 
                     <div class="input-area">
                         <input type="text" id="reference" name="reference" placeholder="N° Referência" maxlength="10">
@@ -20,7 +21,6 @@
                     
                     <div class="input-area">
                         <input type="number" id="quantity" name="quantity" placeholder="Quantidade" maxlength="3">
-                <form action="process-data.php" method="post">
                 
                     <div class="buttons">
                         <button class="save-btn" type="button">SALVAR</button>
@@ -41,7 +41,8 @@
 
                 
                     <div class="ref">
-                        <ul class="list"></ul>
+                        <ul class="list">
+                        </ul>
                     </div>
 
                 <div class="info-results">
@@ -55,6 +56,12 @@
                 </div>
         
             </div>
+
+            <!-- <div class="whatsapp-button hidden">
+                
+                    <a href="https://web.whatsapp.com/send?phone= 5551993893561" target="_blank"><img src="./css/img/whatsapp-icon.png" alt=""></a>
+            
+            </div> -->
         </main>
        
         <footer class="footer">

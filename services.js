@@ -1,4 +1,4 @@
-import { quantityInput, referenceInput, refPanel, removeBtn, logoDiv, refList, totalInfo, skuInfo, refInfo, mediaInfo } from "./app.js";
+import { quantityInput, referenceInput, refPanel, removeBtn, logoDiv, refList, totalInfo, skuInfo, refInfo, mediaInfo} from "./app.js";
 
 const arrReferences = [];
 let totalSku = 0;
@@ -7,7 +7,7 @@ const showReferenceSaved = () => {
    
     referenceInput.focus();
 
-    let quantityValue = quantityInput.value;
+    let quantityValue = Number(quantityInput.value);
     let referenceValue = referenceInput.value;
     
     referenceInput.value = "";
@@ -15,17 +15,18 @@ const showReferenceSaved = () => {
 
     const oP = {
         Reference: referenceValue.toUpperCase(),
-        Quantity: Number(quantityValue),
+        Quantity: Number(quantityValue)
     };
 
-    removeBtn.disabled = false;
+    removeBtn.disabled = true;
 
     const referenceToFind = referenceValue;
 
     const index = arrReferences.findIndex(
         (ref) => ref.Reference === referenceToFind
+        
         );
-       
+        
     setTimeout(() => {
         
         logoDiv.classList.add("hidden");
@@ -36,40 +37,46 @@ const showReferenceSaved = () => {
         for (let i = 0; i < arrReferences.length; i++) {
            
             if (referenceToFind === arrReferences[i].Reference) {
-                refCount ++
-            }
-   
+                refCount ++ 
+
+            } 
+
         }
 
         const notContainInArr = index === -1;
         const containInArr = index !== -1;
         
-        const savedRefCount = `<li class='not-contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs &emsp;<span>(${refCount})</span>&emsp;</label></li>`;
+        const elementWithCounter = `<li class='contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs &emsp;<span>(${refCount})</span>&emsp;</label></li>`;
 
-        const savedRefNotCount = `<li class='not-contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs &emsp;</label></li>`;
+        const elementWithoutCounter = `<li class='not-contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${oP.Quantity}Pçs &emsp;</label></li>`;
+
+        const accumulatedCounterElement = `<li class='not-contain'><input type="checkbox" id="reference"><label for="reference">\&emsp;${oP.Reference} \&emsp;  &rarr; &emsp; ${  oP.Quantity + quantityValue }Pçs &emsp;</label></li>`;
+
         
         if (notContainInArr) {
             
             totalSku += 1;
            
-             refList.innerHTML += `${savedRefNotCount}`
-             
-            
-        } if(containInArr){
+             refList.innerHTML += `${elementWithoutCounter}`
+           
+        } 
+        if(containInArr) {
 
-            console.log(referenceToFind + `(${refCount})`)
-
-        
+    
+            refList.innerHTML += `${elementWithoutCounter}`
+           
             }
-        
+
+            arrReferences.push(oP);
+
             totalSku
         
-        arrReferences.push(oP);
-
         const totalQuantity = arrReferences.reduce(
             (totalQuantity, value) => totalQuantity + value.Quantity,
             0
         );
+
+      
     
         totalInfo.innerHTML = `<span>TOTAL: ${totalQuantity}</span>`;
         skuInfo.innerHTML = `<span>SKU: ${totalSku}</span>`;
