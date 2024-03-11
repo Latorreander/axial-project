@@ -76,7 +76,13 @@ const showReferenceSaved = () => {
             0
         );
 
-      
+        if(arrReferences.length >= 15){
+            refList.style.fontSize= 14+'px'        
+        }
+
+        if(arrReferences.length >= 20){
+            refList.style.fontSize= 12+'px'        
+        }
     
         totalInfo.innerHTML = `<span>TOTAL: ${totalQuantity}</span>`;
         skuInfo.innerHTML = `<span>SKU: ${totalSku}</span>`;
