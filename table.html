@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.table.css">
+    <title>Projeção H/H</title>
+</head>
+<body>
+
+    <main class="table">
+        <div class="input-radio">
+            <p>VIRADA:</p>
+            <input type="radio" id="SIM"
+            name="option" value="8">
+            <label for="sim">SIM</label>
+
+            <input type="radio" id="NÃO"
+            name="option" value="7" checked>
+            <label for="não">NÃO</label>
+        </div>
+
+        <form>
+
+            <label for="turn">Horas de trabalho:</label>
+            <input type="text" id="turn" min="7" max="8" value="7" disabled>
+           
+            <label for="meta">Meta:</label>
+            <input type="number" id="goal" min="4500" max="6000" step="100">
+            <button class="goal-btn">OK</button>
+    
+        </form>
+         
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Horário</th>
+                    <th scope="col">Meta h/h</th>
+                    <th scope="col">Realizado</th>
+                </tr>
+            </thead>
+        <form>
+            <tbody>
+                <tr>
+                    <th scope="row">6h-7h</th>
+                    <td class="data" id="data-01"></td>
+                
+                    <td class="realized"><input type="number" id="h-h_realized_01" required><button class="btn-realized_01">OK</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">7h-8h</th>
+                    <td class="data" id="data-02"></td>
+                    <td class="realized"><input type="number" id="h-h_realized_02"><button class="btn-realized_02">OK</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">8h-9h</th>
+                    <td class="data" id="data-03"></td>
+                    <td class="realized"><input type="number" id="h-h_realized_03"><button class="btn-realized_03">OK</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">9h-10h</th>
+                    <td class="data" id="data-04"></td>
+                    <td class="realized"><input type="number" id="h-h_realized_04"><button class="btn-realized_04">OK</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">10h-11h</th>
+                    <td class="data" id="data-05"></td>
+                    <td class="realized"><input type="number" id="h-h_realized_05"><button class="btn-realized_05">OK</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">11h-12h</th>
+                    <td class="data" id="data-06"></td>
+                    <td class="realized"><input type="text" id="h-h_realized_06"><button class="btn-realized_06">OK</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">12h-13h</th>
+                    <td class="data"id="data-07"></td>
+                    <td class="realized"><input type="text" id="h-h_realized_07"><button class="btn-realized_07">OK</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">13h-14:15</th>
+                    <td class="data" id="data-08"></td>
+                    <td class="realized"><input type="number" id="h-h_realized_08"><button class="btn-realized_08">OK</button></td>
+                </tr>
+            </tbody>
+        </table>
+        </form>
+    
+        <div class="message-div">
+            <h1 class="message"></h1>
+        </div>
+    </main>
+   
+
+    <script src="table.js"></script>
+</body>
+</html>

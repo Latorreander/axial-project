@@ -49,7 +49,6 @@ body {
 
 .buttons {
     margin-top: 15px;
-   
 }
 
 .buttons .save-btn {
@@ -60,7 +59,6 @@ body {
 .remove-btn {
     width: 83px;
 }
-
 
 .logo-spinner.hidden {
     display: none;
@@ -102,7 +100,6 @@ body {
 }
 
 .reference-panel ul {
-    
     text-align: center;
     font-size: 15px;
     padding: 8px;
@@ -115,9 +112,8 @@ body {
     align-items: center;
     align-items: center;
     /* list-style-type: square; */
-    margin: 0  7px;
+    margin: 0 7px;
 }
-
 
 .reference-panel .not-contain.hidden {
     display: none;
@@ -172,7 +168,6 @@ body {
     cursor: pointer;
 }
 
-
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -180,7 +175,7 @@ input::-webkit-inner-spin-button {
 }
 
 .footer {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     position: fixed;
     bottom: 0px;
@@ -190,4 +185,10 @@ input::-webkit-inner-spin-button {
 .footer div {
     font-weight: 300;
     color: #fff;
+}
+.footer button {
+    background-color: #ea612d;
+    padding: 6px;
+    border-radius: 8px;
+    cursor: pointer;
 }

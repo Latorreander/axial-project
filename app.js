@@ -12,7 +12,9 @@ const removeBtn = document.querySelector(".remove-btn");
 const mediaInfo = document.querySelector(".media");
 const logoDiv = document.querySelector(".logo-spinner");
 
-
+window.onbeforeunload = () => {
+    event.preventDefault();
+};
 
 document.addEventListener("keypress", (e) => {
     if (e.keyCode === 13) {
@@ -23,13 +25,10 @@ document.addEventListener("keypress", (e) => {
 removeBtn.disabled = true;
 
 saveBtn.addEventListener("click", () => {
-    
     logoDiv.classList.remove("hidden");
-   
 
     let referenceValue = referenceInput.value;
     let quantityValue = quantityInput.value;
-    
 
     if (referenceValue === "") {
         refPanel.classList.add("hidden");
@@ -45,24 +44,32 @@ saveBtn.addEventListener("click", () => {
         return;
     }
 
-    if (quantityValue < 1){
+    if (quantityValue < 1) {
         refPanel.classList.add("hidden");
         removeBtn.disabled = true;
-        alert('DIGITE UM VALOR MAIOR QUE ZERO!')
-        return
+        alert("DIGITE UM VALOR MAIOR QUE ZERO!");
+        return;
     }
 
     if (referenceValue.length < 6) {
         refPanel.classList.add("hidden");
         removeBtn.disabled = true;
         alert("REFERÊNCIA INVÁLIDA!");
-        return
+        return;
     }
-    
 
-    showReferenceSaved()
+    showReferenceSaved();
 });
 
-
-
-export { quantityInput, referenceInput, refPanel, removeBtn, logoDiv, refList,totalInfo, skuInfo, refInfo, mediaInfo};
+export {
+    quantityInput,
+    referenceInput,
+    refPanel,
+    removeBtn,
+    logoDiv,
+    refList,
+    totalInfo,
+    skuInfo,
+    refInfo,
+    mediaInfo,
+};
