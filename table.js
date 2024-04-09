@@ -67,11 +67,9 @@ window.onbeforeunload = () => {
 };
 
 inputRadio.addEventListener("click", (e) => {
-    if (e.target.value === undefined) {
-        return inputTurn.value;
-    }
 
     inputTurn.value = e.target.value;
+    
 });
 
 inputTargetDay.addEventListener("input", () => {
@@ -83,12 +81,15 @@ inputTargetDay.addEventListener("input", () => {
 });
 
 goalBtn.addEventListener("click", () => {
+    inputRadioYes.disabled= true;
+    inputRadioNo.disabled = true;
     inputRealized_01.disabled = false;
-
+    
     workHour = Number(inputTurn.value);
-
+    checkWorkedHour();
     goalBtn.disabled = true;
     btnRealized_01.disabled = false;
+    inputRealized_07.disabled = true; 
 
     targetDay = Number(inputTargetDay.value);
     console.log("Meta do dia:", targetDay);
@@ -99,7 +100,7 @@ goalBtn.addEventListener("click", () => {
         elem.innerHTML = `${Math.round(goalH_H)}`;
     });
 
-    checkWorkedHour();
+    
 });
 
 const checkWorkedHour = () => {
@@ -107,6 +108,7 @@ const checkWorkedHour = () => {
         data06.innerHTML = "INTERVALO";
         inputRealized_06.value = "❌";
         inputRealized_06.disabled = true;
+        inputRealized_07.disabled = false;
     }
 };
 
@@ -120,14 +122,14 @@ const goalBalanceDay = () => {
     return (balanceDay = targetDay - totalRelized);
 };
 
-//função calcula quanto deverá ser produzido no hora/hora pra bater meta diária:
+//função calcula o saldo de peças:
 const balance_H_H = (balance) => {
     console.log("Saldo de peças:", balance);
 };
 
 //função  atualiza a meta hora/hora:
 const insertNewBalance_H_H = (hours) => {
-    let balance = `${Math.round(balanceDay / hours)}`;
+    let balance = `${Math.floor(balanceDay / hours)}`;
 
     data.forEach((elem) => {
         elem.innerHTML = balance;
@@ -144,23 +146,24 @@ const insertValueH_H = (dataH_H, inputValue) => {
 
 const insertColor = (balance, inputValue, data) => {
     if (inputValue < balance) {
+        console.log(inputValue)
+        console.log(balance)
         data.style.backgroundColor = "#E6E6FA";
         data.style.color = "#FF6347";
     } else if (inputValue >= balance) {
         data.style.backgroundColor = "#E6E6FA";
-        console.log(inputValue);
+     
         data.style.color = "#00FF00";
         console.log("atingiu a meta!");
     }
 };
 
 const showMessage = (balance) => {
-    let goalRealizedText = "META BATIDA!";
+    let goalRealizedText = "META ATINGIDA!";
     let goalNotRealizedText = "FALTOU " + balance + " PEÇAS";
 
     if (totalRelized >= targetDay) {
-        messageDiv.innerHTML = `${goalRealizedText} 
-        TOTAL PRODUZIDO: ${totalRelized}pçs`;
+        messageDiv.innerHTML = `${goalRealizedText} ${totalRelized}pçs.`;
         return;
     } else {
         messageDiv.innerHTML = `${goalNotRealizedText}`;
@@ -177,18 +180,18 @@ btnRealized_01.addEventListener("click", () => {
 
     console.log("Peças Produzidas:", totalRealized);
     balanceDay = goalBalanceDay();
-    balance_H_H(balanceDay);
     workHour;
     workedHours++;
-
+    
     let hoursLeft = workHour - workedHours;
-
+    
     let balanceHour = insertNewBalance_H_H(hoursLeft);
     insertValueH_H(data01, inputRealized_01.value);
-
     insertColor(balanceHour, inputRealized_01.value, data01);
+    
     console.log("horas de trabalho restantes:", hoursLeft);
-
+    balance_H_H(balanceDay);
+    
     checkWorkedHour();
 });
 
@@ -274,11 +277,10 @@ btnRealized_04.addEventListener("click", () => {
     workedHours++;
 
     let hoursLeft = workHour - workedHours;
-
     let balanceHour = insertNewBalance_H_H(hoursLeft);
+    insertColor(balanceHour, inputRealized_04.value, data04);
     insertValueH_H(data04, inputRealized_04.value);
 
-    insertColor(balanceHour, inputRealized_04.value, data04);
     insertNewBalance_H_H(hoursLeft);
     insertValueH_H(data01, inputRealized_01.value);
     insertValueH_H(data02, inputRealized_02.value);
@@ -310,7 +312,7 @@ btnRealized_05.addEventListener("click", () => {
     inputRealized_03.disabled = true;
     inputRealized_04.disabled = true;
     inputRealized_05.disabled = true;
-    inputRealized_07.disabled = false;
+    inputRealized_06.disabled = false;
 
     let totalRealized = sumH_H(inputRealized_05);
     console.log("Peças Produzidas:", totalRealized);
@@ -464,5 +466,5 @@ btnRealized_08.addEventListener("click", () => {
     checkWorkedHour();
 
     showMessage(balanceDay);
-    console.log(balanceDay);
+    
 });
