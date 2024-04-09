@@ -34,9 +34,6 @@ const inputRadioYes = document.getElementById("SIM");
 const inputRadioNo = document.getElementById("NÃO");
 const inputRadio = document.querySelector(".input-radio");
 
-console.log(inputRadioNo.value);
-console.log(inputRadioYes.value);
-
 btnRealized_01.disabled = true;
 btnRealized_02.disabled = true;
 btnRealized_03.disabled = true;
@@ -67,9 +64,7 @@ window.onbeforeunload = () => {
 };
 
 inputRadio.addEventListener("click", (e) => {
-
     inputTurn.value = e.target.value;
-    
 });
 
 inputTargetDay.addEventListener("input", () => {
@@ -81,15 +76,15 @@ inputTargetDay.addEventListener("input", () => {
 });
 
 goalBtn.addEventListener("click", () => {
-    inputRadioYes.disabled= true;
+    inputRadioYes.disabled = true;
     inputRadioNo.disabled = true;
     inputRealized_01.disabled = false;
-    
+
     workHour = Number(inputTurn.value);
     checkWorkedHour();
     goalBtn.disabled = true;
     btnRealized_01.disabled = false;
-    inputRealized_07.disabled = true; 
+    inputRealized_07.disabled = true;
 
     targetDay = Number(inputTargetDay.value);
     console.log("Meta do dia:", targetDay);
@@ -99,8 +94,6 @@ goalBtn.addEventListener("click", () => {
     data.forEach((elem) => {
         elem.innerHTML = `${Math.round(goalH_H)}`;
     });
-
-    
 });
 
 const checkWorkedHour = () => {
@@ -146,13 +139,13 @@ const insertValueH_H = (dataH_H, inputValue) => {
 
 const insertColor = (balance, inputValue, data) => {
     if (inputValue < balance) {
-        console.log(inputValue)
-        console.log(balance)
+        console.log(inputValue);
+        console.log(balance);
         data.style.backgroundColor = "#E6E6FA";
         data.style.color = "#FF6347";
     } else if (inputValue >= balance) {
         data.style.backgroundColor = "#E6E6FA";
-     
+
         data.style.color = "#00FF00";
         console.log("atingiu a meta!");
     }
@@ -182,16 +175,16 @@ btnRealized_01.addEventListener("click", () => {
     balanceDay = goalBalanceDay();
     workHour;
     workedHours++;
-    
+
     let hoursLeft = workHour - workedHours;
-    
+
     let balanceHour = insertNewBalance_H_H(hoursLeft);
     insertValueH_H(data01, inputRealized_01.value);
     insertColor(balanceHour, inputRealized_01.value, data01);
-    
+
     console.log("horas de trabalho restantes:", hoursLeft);
     balance_H_H(balanceDay);
-    
+
     checkWorkedHour();
 });
 
@@ -293,7 +286,6 @@ btnRealized_04.addEventListener("click", () => {
 
 const disableButton = (hoursLeft) => {
     if (hoursLeft === 2) {
-        console.log("caiu aqui");
         btnRealized_06.disabled = true;
         btnRealized_07.disabled = false;
     }
@@ -466,5 +458,4 @@ btnRealized_08.addEventListener("click", () => {
     checkWorkedHour();
 
     showMessage(balanceDay);
-    
 });
