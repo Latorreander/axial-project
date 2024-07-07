@@ -12,22 +12,22 @@
         <div class="input-radio">
             <p>VIRADA:</p>
             <input type="radio" id="SIM"
-            name="option" value="8">
+            name="option" value="8.3">
             <label for="sim">SIM</label>
 
             <input type="radio" id="NÃO"
-            name="option" value="7" checked>
+            name="option" value="7.3" checked>
             <label for="não">NÃO</label>
         </div>
 
         <form>
 
             <label for="turn">Horas de trabalho:</label>
-            <input type="text" id="turn" min="7" max="8" value="7" disabled>
+            <input type="text" id="turn" min="7.3" max="8.3" value="7.3" disabled>
            
             <label for="meta">Meta:</label>
             <input type="number" id="goal" min="4500" max="6000" step="100">
-            <button class="goal-btn">OK</button>
+            <button class="goal-btn">START</button>
     
         </form>
          
@@ -45,7 +45,7 @@
                     <th scope="row">6h-7h</th>
                     <td class="data" id="data-01"></td>
                 
-                    <td class="realized"><input type="number" id="h-h_realized_01" required><button class="btn-realized_01">OK</button></td>
+                    <td class="realized"><input type="number" id="h-h_realized_01"><button class="btn-realized_01">OK</button></td>
                 </tr>
                 <tr>
                     <th scope="row">7h-8h</th>
@@ -78,9 +78,14 @@
                     <td class="realized"><input type="text" id="h-h_realized_07"><button class="btn-realized_07">OK</button></td>
                 </tr>
                 <tr>
-                    <th scope="row">13h-14:15</th>
+                    <th scope="row">13h-14:00</th>
                     <td class="data" id="data-08"></td>
                     <td class="realized"><input type="number" id="h-h_realized_08"><button class="btn-realized_08">OK</button></td>
+                </tr>
+                <tr>
+                    <th scope="row">14h-14:20</th>
+                    <td class="last-data" id="data-09"></td>
+                    <td class="realized"><input type="number" id="h-h_realized_09"><button class="btn-realized_09">OK</button></td>
                 </tr>
             </tbody>
         </table>

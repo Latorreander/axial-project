@@ -1,4 +1,5 @@
 const data = document.querySelectorAll(".data");
+const lastData = document.querySelector(".last-data");
 const data01 = document.getElementById("data-01");
 const data02 = document.getElementById("data-02");
 const data03 = document.getElementById("data-03");
@@ -7,6 +8,7 @@ const data05 = document.getElementById("data-05");
 const data06 = document.getElementById("data-06");
 const data07 = document.getElementById("data-07");
 const data08 = document.getElementById("data-08");
+const data09 = document.getElementById("data-09");
 
 const inputTargetDay = document.getElementById("goal");
 const goalBtn = document.querySelector(".goal-btn");
@@ -20,6 +22,8 @@ const inputRealized_05 = document.getElementById("h-h_realized_05");
 const inputRealized_06 = document.getElementById("h-h_realized_06");
 const inputRealized_07 = document.getElementById("h-h_realized_07");
 const inputRealized_08 = document.getElementById("h-h_realized_08");
+const inputRealized_09 = document.getElementById("h-h_realized_09");
+
 const btnRealized_01 = document.querySelector(".btn-realized_01");
 const btnRealized_02 = document.querySelector(".btn-realized_02");
 const btnRealized_03 = document.querySelector(".btn-realized_03");
@@ -28,6 +32,8 @@ const btnRealized_05 = document.querySelector(".btn-realized_05");
 const btnRealized_06 = document.querySelector(".btn-realized_06");
 const btnRealized_07 = document.querySelector(".btn-realized_07");
 const btnRealized_08 = document.querySelector(".btn-realized_08");
+const btnRealized_09 = document.querySelector(".btn-realized_09");
+
 const turnBtn = document.querySelector(".turn-btn");
 const messageDiv = document.querySelector(".message");
 const inputRadioYes = document.getElementById("SIM");
@@ -42,6 +48,7 @@ btnRealized_05.disabled = true;
 btnRealized_06.disabled = true;
 btnRealized_07.disabled = true;
 btnRealized_08.disabled = true;
+btnRealized_09.disabled = true;
 
 inputRealized_01.disabled = true;
 inputRealized_02.disabled = true;
@@ -51,13 +58,18 @@ inputRealized_05.disabled = true;
 inputRealized_06.disabled = true;
 inputRealized_07.disabled = true;
 inputRealized_08.disabled = true;
+inputRealized_09.disabled = true;
 
 let workedHours = 0;
 let workHour = 0;
 let targetDay = 0;
-let totalRelized = 0;
+let totalRealized = 0;
 let balanceDay = 0;
 goalBtn.disabled = true;
+
+const inputFocus = (inputEnabled) => {
+    document.getElementById(inputEnabled).focus();
+};
 
 window.onbeforeunload = () => {
     event.preventDefault();
@@ -79,12 +91,12 @@ goalBtn.addEventListener("click", () => {
     inputRadioYes.disabled = true;
     inputRadioNo.disabled = true;
     inputRealized_01.disabled = false;
+    btnRealized_01.disabled = false;
+    inputFocus("h-h_realized_01");
 
     workHour = Number(inputTurn.value);
-    checkWorkedHour();
     goalBtn.disabled = true;
-    btnRealized_01.disabled = false;
-    inputRealized_07.disabled = true;
+    // inputRealized_07.disabled = true;
 
     targetDay = Number(inputTargetDay.value);
     console.log("Meta do dia:", targetDay);
@@ -92,27 +104,57 @@ goalBtn.addEventListener("click", () => {
     goalH_H = targetDay / workHour;
 
     data.forEach((elem) => {
-        elem.innerHTML = `${Math.round(goalH_H)}`;
+        elem.innerHTML = `${Math.round(goalH_H) + 1}`;
     });
+
+    calcLast20Minutes(goalH_H);
+    checkWorkedHour();
 });
 
+const calcLast20Minutes = (goalH_H) => {
+    let goalLast20Minutes = targetDay - goalH_H * (workHour - 0.3);
+
+    lastData.innerHTML = `${Math.round(goalLast20Minutes)}`;
+
+    if (goalH_H < 0) {
+        lastData.innerHTML = "0";
+    }
+};
+
+const calcLast20minH_H = (targetDay, balanceHour, hoursLeft) => {
+    let goalLast20Minutes = targetDay - balanceHour * (hoursLeft - 0.3);
+
+    lastData.innerHTML = `${Math.round(goalLast20Minutes)}`;
+
+    if (balanceHour < 0) {
+        lastData.innerHTML = "0";
+    }
+};
+
+//função que confere a quantidade de horas trabalhadas
 const checkWorkedHour = () => {
-    if (workHour === 7) {
+    if (workHour === 7.3) {
         data06.innerHTML = "INTERVALO";
         inputRealized_06.value = "❌";
         inputRealized_06.disabled = true;
-        inputRealized_07.disabled = false;
+        // inputRealized_07.disabled = false;
+    } else {
+        inputRealized_06.disabled = false;
+        inputRealized_07.disabled = true;
+        // inputFocus('h-h_realized_06')
     }
 };
 
 // função soma valores ja produzidos por hora:
 const sumH_H = (x) => {
-    return (totalRelized += Number(x.value));
+    return (totalRealized += Number(x.value));
 };
 
 // função calcula a meta diária menos a quantidade já produzida:
 const goalBalanceDay = () => {
-    return (balanceDay = targetDay - totalRelized);
+    balanceDay = targetDay - totalRealized;
+
+    return balanceDay;
 };
 
 //função calcula o saldo de peças:
@@ -122,11 +164,15 @@ const balance_H_H = (balance) => {
 
 //função  atualiza a meta hora/hora:
 const insertNewBalance_H_H = (hours) => {
-    let balance = `${Math.floor(balanceDay / hours)}`;
+    let balance = `${Math.round(balanceDay / hours)}`;
 
     data.forEach((elem) => {
         elem.innerHTML = balance;
+        if (balance < 0) {
+            elem.innerHTML = "0";
+        }
     });
+
     console.log("Meta atualizada por hora:", Number(balance));
 
     return balance;
@@ -151,30 +197,20 @@ const insertColor = (balance, inputValue, data) => {
     }
 };
 
-const showMessage = (balance) => {
-    let goalRealizedText = "META ATINGIDA!";
-    let goalNotRealizedText = "FALTOU " + balance + " PEÇAS";
-
-    if (totalRelized >= targetDay) {
-        messageDiv.innerHTML = `${goalRealizedText} ${totalRelized}pçs.`;
-        return;
-    } else {
-        messageDiv.innerHTML = `${goalNotRealizedText}`;
-    }
-};
-
 btnRealized_01.addEventListener("click", () => {
     btnRealized_01.disabled = true;
     btnRealized_02.disabled = false;
-
     inputRealized_01.disabled = true;
     inputRealized_02.disabled = false;
+    inputFocus("h-h_realized_02");
+
     let totalRealized = sumH_H(inputRealized_01);
 
     console.log("Peças Produzidas:", totalRealized);
     balanceDay = goalBalanceDay();
     workHour;
     workedHours++;
+    console.log(balanceDay);
 
     let hoursLeft = workHour - workedHours;
 
@@ -185,6 +221,7 @@ btnRealized_01.addEventListener("click", () => {
     console.log("horas de trabalho restantes:", hoursLeft);
     balance_H_H(balanceDay);
 
+    calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
 });
 
@@ -196,6 +233,8 @@ btnRealized_02.addEventListener("click", () => {
     inputRealized_01.disabled = true;
     inputRealized_02.disabled = true;
     inputRealized_03.disabled = false;
+    inputFocus("h-h_realized_03");
+
     let totalRealized = sumH_H(inputRealized_02);
     console.log("Peças Produzidas:", totalRealized);
     balanceDay = goalBalanceDay();
@@ -215,6 +254,7 @@ btnRealized_02.addEventListener("click", () => {
 
     console.log("horas de trabalho restantes:", hoursLeft);
 
+    calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
 });
 
@@ -228,6 +268,8 @@ btnRealized_03.addEventListener("click", () => {
     inputRealized_02.disabled = true;
     inputRealized_03.disabled = true;
     inputRealized_04.disabled = false;
+    inputFocus("h-h_realized_04");
+
     let totalRealized = sumH_H(inputRealized_03);
     console.log("Peças Produzidas:", totalRealized);
     balanceDay = goalBalanceDay();
@@ -247,6 +289,7 @@ btnRealized_03.addEventListener("click", () => {
     insertValueH_H(data03, inputRealized_03.value);
     console.log("horas de trabalho restantes:", hoursLeft);
 
+    calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
 });
 
@@ -262,6 +305,8 @@ btnRealized_04.addEventListener("click", () => {
     inputRealized_03.disabled = true;
     inputRealized_04.disabled = true;
     inputRealized_05.disabled = false;
+    inputFocus("h-h_realized_05");
+
     let totalRealized = sumH_H(inputRealized_04);
     console.log("Peças Produzidas:", totalRealized);
     balanceDay = goalBalanceDay();
@@ -281,6 +326,7 @@ btnRealized_04.addEventListener("click", () => {
     insertValueH_H(data04, inputRealized_04.value);
     console.log("horas de trabalho restantes:", hoursLeft);
 
+    calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
 });
 
@@ -297,14 +343,18 @@ btnRealized_05.addEventListener("click", () => {
     btnRealized_03.disabled = true;
     btnRealized_04.disabled = true;
     btnRealized_05.disabled = true;
-    btnRealized_06.disabled = false;
+    btnRealized_06.disabled = true;
+    btnRealized_07.disabled = false;
 
     inputRealized_01.disabled = true;
     inputRealized_02.disabled = true;
     inputRealized_03.disabled = true;
     inputRealized_04.disabled = true;
     inputRealized_05.disabled = true;
-    inputRealized_06.disabled = false;
+    inputRealized_06.disabled = true;
+    inputRealized_07.disabled = false;
+
+    inputFocus("h-h_realized_07");
 
     let totalRealized = sumH_H(inputRealized_05);
     console.log("Peças Produzidas:", totalRealized);
@@ -326,7 +376,9 @@ btnRealized_05.addEventListener("click", () => {
     insertValueH_H(data04, inputRealized_04.value);
     insertValueH_H(data05, inputRealized_05.value);
     console.log("horas de trabalho restantes:", hoursLeft);
+    showMessage(balanceDay);
 
+    calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
 });
 
@@ -346,6 +398,7 @@ btnRealized_06.addEventListener("click", () => {
     inputRealized_05.disabled = true;
     inputRealized_06.disabled = true;
     inputRealized_07.disabled = false;
+    inputFocus("h-h_realized_07");
 
     let totalRealized = sumH_H(inputRealized_06);
     console.log("Peças Produzidas:", totalRealized);
@@ -356,10 +409,8 @@ btnRealized_06.addEventListener("click", () => {
     workedHours++;
 
     let hoursLeft = workHour - workedHours;
-
     let balanceHour = insertNewBalance_H_H(hoursLeft);
     insertValueH_H(data06, inputRealized_06.value);
-
     insertColor(balanceHour, inputRealized_06.value, data06);
     insertNewBalance_H_H(hoursLeft);
     insertValueH_H(data01, inputRealized_01.value);
@@ -367,10 +418,13 @@ btnRealized_06.addEventListener("click", () => {
     insertValueH_H(data03, inputRealized_03.value);
     insertValueH_H(data04, inputRealized_04.value);
     insertValueH_H(data05, inputRealized_05.value);
+    insertValueH_H(data06, inputRealized_06.value);
 
     console.log("horas de trabalho restantes:", hoursLeft);
 
+    calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
+    showMessage(balanceDay);
 });
 
 btnRealized_07.addEventListener("click", () => {
@@ -392,6 +446,7 @@ btnRealized_07.addEventListener("click", () => {
     inputRealized_06.disabled = true;
     inputRealized_07.disabled = true;
     inputRealized_08.disabled = false;
+    inputFocus("h-h_realized_08");
 
     let totalRealized = sumH_H(inputRealized_07);
     console.log("Peças Produzidas:", totalRealized);
@@ -417,7 +472,9 @@ btnRealized_07.addEventListener("click", () => {
 
     console.log("horas de trabalho restantes:", hoursLeft);
 
+    calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
+    showMessage(balanceDay);
 });
 
 btnRealized_08.addEventListener("click", () => {
@@ -430,13 +487,27 @@ btnRealized_08.addEventListener("click", () => {
     btnRealized_06.disabled = true;
     btnRealized_07.disabled = true;
     btnRealized_08.disabled = true;
+    btnRealized_09.disabled = false;
 
+    inputRealized_01.disabled = true;
+    inputRealized_02.disabled = true;
+    inputRealized_03.disabled = true;
+    inputRealized_04.disabled = true;
+    inputRealized_05.disabled = true;
+    inputRealized_06.disabled = true;
+    inputRealized_07.disabled = true;
     inputRealized_08.disabled = true;
+    inputRealized_09.disabled = false;
+    inputFocus("h-h_realized_09");
 
     let totalRealized = sumH_H(inputRealized_08);
+    console.log("Peças Produzidas:", totalRealized);
     balanceDay = goalBalanceDay();
     balance_H_H(balanceDay);
-    hoursLeft = 1;
+    workHour;
+    workedHours++;
+
+    let hoursLeft = workHour - workedHours;
 
     let balanceHour = insertNewBalance_H_H(hoursLeft);
     insertValueH_H(data08, inputRealized_08.value);
@@ -453,9 +524,79 @@ btnRealized_08.addEventListener("click", () => {
     insertValueH_H(data08, inputRealized_08.value);
 
     console.log("horas de trabalho restantes:", hoursLeft);
+
+    calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
+    checkWorkedHour();
+    showMessage(balanceDay);
+});
+
+btnRealized_09.addEventListener("click", () => {
+    btnRealized_01.disabled = true;
+    btnRealized_02.disabled = true;
+    btnRealized_03.disabled = true;
+    btnRealized_04.disabled = true;
+    btnRealized_05.disabled = true;
+    btnRealized_06.disabled = true;
+    btnRealized_06.disabled = true;
+    btnRealized_07.disabled = true;
+    btnRealized_08.disabled = true;
+    btnRealized_09.disabled = true;
+
+    let totalRealized = sumH_H(inputRealized_09);
+    balanceDay = goalBalanceDay();
+    balance_H_H(balanceDay);
+    hoursLeft = 0.25;
+
+    let balanceHour = insertNewBalance_H_H(hoursLeft);
+    insertValueH_H(data09, inputRealized_09.value);
+
+    insertColor(balanceHour, inputRealized_09.value, data09);
+    insertNewBalance_H_H(hoursLeft);
+    insertValueH_H(data01, inputRealized_01.value);
+    insertValueH_H(data02, inputRealized_02.value);
+    insertValueH_H(data03, inputRealized_03.value);
+    insertValueH_H(data04, inputRealized_04.value);
+    insertValueH_H(data05, inputRealized_05.value);
+    insertValueH_H(data06, inputRealized_06.value);
+    insertValueH_H(data07, inputRealized_07.value);
+    insertValueH_H(data08, inputRealized_08.value);
+    insertValueH_H(data09, inputRealized_09.value);
+
+    console.log("horas de trabalho restantes:", hoursLeft);
     console.log("Peças Produzidas:", totalRealized);
 
+    calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
 
     showMessage(balanceDay);
 });
+
+const showMessage = () => {
+    let goalRealizedText = "META ALCANÇADA";
+
+    if (totalRealized >= targetDay) {
+        messageDiv.innerHTML = `${goalRealizedText} ${totalRealized}pçs.`;
+
+        btnRealized_01.disabled = true;
+        btnRealized_02.disabled = true;
+        btnRealized_03.disabled = true;
+        btnRealized_04.disabled = true;
+        btnRealized_05.disabled = true;
+        btnRealized_06.disabled = true;
+        btnRealized_06.disabled = true;
+        btnRealized_07.disabled = true;
+        btnRealized_08.disabled = true;
+        btnRealized_09.disabled = true;
+
+        inputRealized_01.disabled = true;
+        inputRealized_02.disabled = true;
+        inputRealized_03.disabled = true;
+        inputRealized_04.disabled = true;
+        inputRealized_05.disabled = true;
+        inputRealized_06.disabled = true;
+        inputRealized_07.disabled = true;
+        inputRealized_08.disabled = true;
+        inputRealized_09.disabled = true;
+        return;
+    }
+};
