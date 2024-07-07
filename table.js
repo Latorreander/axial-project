@@ -75,8 +75,11 @@ window.onbeforeunload = () => {
     event.preventDefault();
 };
 
-inputRadio.addEventListener("click", (e) => {
+inputRadio.addEventListener("input", (e) => {
     inputTurn.value = e.target.value;
+    if(e.target.value === undefined){
+        inputTurn.value = ""
+    }
 });
 
 inputTargetDay.addEventListener("input", () => {
