@@ -107,7 +107,7 @@ goalBtn.addEventListener("click", () => {
     goalH_H = targetDay / workHour;
 
     data.forEach((elem) => {
-        elem.innerHTML = `${Math.round(goalH_H) + 1}`;
+        elem.innerHTML = `${Math.round(goalH_H)}`;
     });
 
     calcLast20Minutes(goalH_H);
@@ -117,20 +117,21 @@ goalBtn.addEventListener("click", () => {
 const calcLast20Minutes = (goalH_H) => {
     let goalLast20Minutes = targetDay - goalH_H * (workHour - 0.3);
 
-    lastData.innerHTML = `${Math.round(goalLast20Minutes)}`;
+    lastData.innerHTML = `${Math.ceil(goalLast20Minutes)+ 1}`;
 
     if (goalH_H < 0) {
-        lastData.innerHTML = "0";
+        lastData.innerHTML = goalH_H;
     }
 };
 
 const calcLast20minH_H = (targetDay, balanceHour, hoursLeft) => {
     let goalLast20Minutes = targetDay - balanceHour * (hoursLeft - 0.3);
 
+
     lastData.innerHTML = `${Math.round(goalLast20Minutes)}`;
 
     if (balanceHour < 0) {
-        lastData.innerHTML = "0";
+        lastData.innerHTML = balanceHour;
     }
 };
 
@@ -141,12 +142,17 @@ const checkWorkedHour = () => {
         inputRealized_06.value = "❌";
         inputRealized_06.disabled = true;
         // inputRealized_07.disabled = false;
-    } else {
-        inputRealized_06.disabled = false;
-        inputRealized_07.disabled = true;
-        // inputFocus('h-h_realized_06')
-    }
+    } 
 };
+// função verifica valor da sexta hora para habilitar a mesma
+const controlValue = () => {
+    if (inputRealized_06 != '❌') {
+        inputRealized_06.disabled = false;
+        btnRealized_06.disabled = false;
+        inputFocus("h-h_realized_06")
+      } 
+}
+
 
 // função soma valores ja produzidos por hora:
 const sumH_H = (x) => {
@@ -171,9 +177,9 @@ const insertNewBalance_H_H = (hours) => {
 
     data.forEach((elem) => {
         elem.innerHTML = balance;
-        if (balance < 0) {
-            elem.innerHTML = "0";
-        }
+        // if (balance < 0) {
+        //     elem.innerHTML = "0";
+        // }
     });
 
     console.log("Meta atualizada por hora:", Number(balance));
@@ -283,7 +289,6 @@ btnRealized_03.addEventListener("click", () => {
 
     let hoursLeft = workHour - workedHours;
     let balanceHour = insertNewBalance_H_H(hoursLeft);
-    insertValueH_H(data03, inputRealized_03.value);
 
     insertColor(balanceHour, inputRealized_03.value, data03);
     insertNewBalance_H_H(hoursLeft);
@@ -320,7 +325,6 @@ btnRealized_04.addEventListener("click", () => {
     let hoursLeft = workHour - workedHours;
     let balanceHour = insertNewBalance_H_H(hoursLeft);
     insertColor(balanceHour, inputRealized_04.value, data04);
-    insertValueH_H(data04, inputRealized_04.value);
 
     insertNewBalance_H_H(hoursLeft);
     insertValueH_H(data01, inputRealized_01.value);
@@ -341,21 +345,24 @@ const disableButton = (hoursLeft) => {
 };
 
 btnRealized_05.addEventListener("click", () => {
+
+    
     btnRealized_01.disabled = true;
     btnRealized_02.disabled = true;
     btnRealized_03.disabled = true;
     btnRealized_04.disabled = true;
     btnRealized_05.disabled = true;
     btnRealized_06.disabled = true;
-    btnRealized_07.disabled = false;
-
+    btnRealized_07.disabled = true;
+    
     inputRealized_01.disabled = true;
     inputRealized_02.disabled = true;
     inputRealized_03.disabled = true;
     inputRealized_04.disabled = true;
     inputRealized_05.disabled = true;
     inputRealized_06.disabled = true;
-    inputRealized_07.disabled = false;
+   
+    controlValue();
 
     inputFocus("h-h_realized_07");
 
@@ -369,7 +376,7 @@ btnRealized_05.addEventListener("click", () => {
 
     let hoursLeft = workHour - workedHours;
     let balanceHour = insertNewBalance_H_H(hoursLeft);
-    insertValueH_H(data05, inputRealized_05.value);
+    
     disableButton(hoursLeft);
     insertColor(balanceHour, inputRealized_05.value, data05);
     insertNewBalance_H_H(hoursLeft);
@@ -383,6 +390,8 @@ btnRealized_05.addEventListener("click", () => {
 
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
+    
+    
 });
 
 btnRealized_06.addEventListener("click", () => {
@@ -413,7 +422,7 @@ btnRealized_06.addEventListener("click", () => {
 
     let hoursLeft = workHour - workedHours;
     let balanceHour = insertNewBalance_H_H(hoursLeft);
-    insertValueH_H(data06, inputRealized_06.value);
+   
     insertColor(balanceHour, inputRealized_06.value, data06);
     insertNewBalance_H_H(hoursLeft);
     insertValueH_H(data01, inputRealized_01.value);
@@ -461,7 +470,6 @@ btnRealized_07.addEventListener("click", () => {
     let hoursLeft = workHour - workedHours;
 
     let balanceHour = insertNewBalance_H_H(hoursLeft);
-    insertValueH_H(data07, inputRealized_07.value);
 
     insertColor(balanceHour, inputRealized_07.value, data07);
     insertNewBalance_H_H(hoursLeft);
@@ -513,7 +521,6 @@ btnRealized_08.addEventListener("click", () => {
     let hoursLeft = workHour - workedHours;
 
     let balanceHour = insertNewBalance_H_H(hoursLeft);
-    insertValueH_H(data08, inputRealized_08.value);
 
     insertColor(balanceHour, inputRealized_08.value, data08);
     insertNewBalance_H_H(hoursLeft);
@@ -551,8 +558,8 @@ btnRealized_09.addEventListener("click", () => {
     hoursLeft = 0.25;
 
     let balanceHour = insertNewBalance_H_H(hoursLeft);
-    insertValueH_H(data09, inputRealized_09.value);
 
+    
     insertColor(balanceHour, inputRealized_09.value, data09);
     insertNewBalance_H_H(hoursLeft);
     insertValueH_H(data01, inputRealized_01.value);
@@ -568,7 +575,6 @@ btnRealized_09.addEventListener("click", () => {
     console.log("horas de trabalho restantes:", hoursLeft);
     console.log("Peças Produzidas:", totalRealized);
 
-    calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
 
     showMessage(balanceDay);
