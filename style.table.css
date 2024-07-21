@@ -18,36 +18,43 @@ body {
 
 .title {
     padding: 8px;
-    background-color: #b0c4de;
+    background-color: #98abc4;
     border-radius: 5px 5px 0 0;
 }
 
+
 .input-radio {
+
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    background-color: #b0c4de;
+    background-color: #98abc4;
     padding: 8px 0 20px;
     margin-bottom: 5px;
 }
 
 #goal {
-    background-color: #fffafa;
-    border-radius: 5px;
-}
+    background-color: #FFFAFA;
+   border-radius: 5px;
+} 
 
-.input-radio .radio {
+
+.input-radio .radio  {
+
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center
+   
 }
 
+
 form {
-    background-color: #b0c4de;
+
+    background-color: #98abc4;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    padding: 20px 20px;
+    padding: 20px 20px ;
     margin-bottom: 5px;
 }
 
@@ -56,9 +63,12 @@ form .hours {
 }
 
 .table {
+   
     text-align: center;
     margin: 0 auto;
+    
 }
+
 
 .goal-btn {
     background-color: #ff8c00c6;
@@ -66,23 +76,28 @@ form .hours {
     padding: 6px;
 }
 
-input[type="radio"] {
-    accent-color: #ea612d;
-    background-color: #fffafa;
+
+
+input[type = 'radio']{
+    accent-color: #dc7b05ed;
+    background-color: #FFFAFA;
     margin: 0 auto;
     cursor: pointer;
 }
 
 table {
+    
     width: 500px;
     height: 100%;
-    background-color: #b0c4de;
+    background-color: #98abc4;
     border-radius: 5px;
 }
 
 tbody {
-    background-color: #ff8c00c6;
+   
+    background-color: #dc7b05ed;
     border-radius: 5px;
+    
 }
 
 #turn,
@@ -91,19 +106,26 @@ tbody {
     width: 35px;
 }
 
+
 th {
+    
     text-align: center;
     border-radius: 5px;
     width: 95px;
     height: 40px;
+
 }
+
 
 td {
-    padding: 5px;
-    border-radius: 5px;
+
+padding: 5px;
+border-radius: 5px;
+
 }
 
-input {
+ input {
+
     font-family: sunflower, sans-serif;
     font-size: 18px;
     margin-right: 5px;
@@ -112,6 +134,7 @@ input {
 }
 
 button {
+   
     cursor: pointer;
 }
 
@@ -126,8 +149,10 @@ button {
 }
 
 .realized {
-    display: flex;
+    display:flex;
     justify-content: space-evenly;
+    
+    
 }
 
 .realized input {
@@ -140,9 +165,10 @@ button {
     border-radius: 5px;
 }
 
-td input::-webkit-inner-spin-button {
+ td input::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
+
 
 .message {
     animation: blink 1s infinite;
