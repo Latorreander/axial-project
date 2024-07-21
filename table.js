@@ -65,6 +65,7 @@ let workHour = 0;
 let targetDay = 0;
 let totalRealized = 0;
 let balanceDay = 0;
+
 goalBtn.disabled = true;
 
 const inputFocus = (inputEnabled) => {
@@ -77,8 +78,8 @@ window.onbeforeunload = () => {
 
 inputRadio.addEventListener("input", (e) => {
     inputTurn.value = e.target.value;
-    if(e.target.value === undefined){
-        inputTurn.value = ""
+    if (e.target.value === undefined) {
+        inputTurn.value = "";
     }
 });
 
@@ -117,7 +118,7 @@ goalBtn.addEventListener("click", () => {
 const calcLast20Minutes = (goalH_H) => {
     let goalLast20Minutes = targetDay - goalH_H * (workHour - 0.3);
 
-    lastData.innerHTML = `${Math.ceil(goalLast20Minutes)+ 1}`;
+    lastData.innerHTML = `${Math.ceil(goalLast20Minutes) + 1}`;
 
     if (goalH_H < 0) {
         lastData.innerHTML = goalH_H;
@@ -127,11 +128,10 @@ const calcLast20Minutes = (goalH_H) => {
 const calcLast20minH_H = (targetDay, balanceHour, hoursLeft) => {
     let goalLast20Minutes = targetDay - balanceHour * (hoursLeft - 0.3);
 
-
     lastData.innerHTML = `${Math.round(goalLast20Minutes)}`;
 
     if (balanceHour < 0) {
-        lastData.innerHTML = balanceHour;
+        lastData.innerHTML = 0;
     }
 };
 
@@ -141,18 +141,23 @@ const checkWorkedHour = () => {
         data06.innerHTML = "INTERVALO";
         inputRealized_06.value = "❌";
         inputRealized_06.disabled = true;
-        // inputRealized_07.disabled = false;
-    } 
+      
+    }
 };
+
 // função verifica valor da sexta hora para habilitar a mesma
 const controlValue = () => {
-    if (inputRealized_06 != '❌') {
+    if (inputRealized_06.value !== "❌") {
         inputRealized_06.disabled = false;
         btnRealized_06.disabled = false;
-        inputFocus("h-h_realized_06")
-      } 
-}
-
+        inputFocus("h-h_realized_06");
+    } else {
+        btnRealized_06.disabled = true;
+        inputRealized_06.disabled = true;
+        btnRealized_07.disabled = false;
+        inputRealized_07.disabled = false;
+    }
+};
 
 // função soma valores ja produzidos por hora:
 const sumH_H = (x) => {
@@ -177,9 +182,10 @@ const insertNewBalance_H_H = (hours) => {
 
     data.forEach((elem) => {
         elem.innerHTML = balance;
-        // if (balance < 0) {
-        //     elem.innerHTML = "0";
-        // }
+
+        if (balance < 0) {
+            elem.innerHTML = "0";
+        }
     });
 
     console.log("Meta atualizada por hora:", Number(balance));
@@ -194,15 +200,14 @@ const insertValueH_H = (dataH_H, inputValue) => {
 
 const insertColor = (balance, inputValue, data) => {
     if (inputValue < balance) {
-        console.log(inputValue);
-        console.log(balance);
+  
         data.style.backgroundColor = "#E6E6FA";
-        data.style.color = "#FF6347";
+        data.style.color = "#FF0000";
     } else if (inputValue >= balance) {
         data.style.backgroundColor = "#E6E6FA";
 
-        data.style.color = "#00FF00";
-        console.log("atingiu a meta!");
+        data.style.color = "#3CB371";
+    
     }
 };
 
@@ -219,15 +224,13 @@ btnRealized_01.addEventListener("click", () => {
     balanceDay = goalBalanceDay();
     workHour;
     workedHours++;
-    console.log(balanceDay);
-
+   
     let hoursLeft = workHour - workedHours;
 
     let balanceHour = insertNewBalance_H_H(hoursLeft);
     insertValueH_H(data01, inputRealized_01.value);
     insertColor(balanceHour, inputRealized_01.value, data01);
 
-    console.log("horas de trabalho restantes:", hoursLeft);
     balance_H_H(balanceDay);
 
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
@@ -345,23 +348,20 @@ const disableButton = (hoursLeft) => {
 };
 
 btnRealized_05.addEventListener("click", () => {
-
-    
     btnRealized_01.disabled = true;
     btnRealized_02.disabled = true;
     btnRealized_03.disabled = true;
     btnRealized_04.disabled = true;
     btnRealized_05.disabled = true;
-    btnRealized_06.disabled = true;
-    btnRealized_07.disabled = true;
-    
+    btnRealized_06.disabled = false;
+
     inputRealized_01.disabled = true;
     inputRealized_02.disabled = true;
     inputRealized_03.disabled = true;
     inputRealized_04.disabled = true;
     inputRealized_05.disabled = true;
-    inputRealized_06.disabled = true;
-   
+    inputRealized_06.disabled = false;
+
     controlValue();
 
     inputFocus("h-h_realized_07");
@@ -376,7 +376,7 @@ btnRealized_05.addEventListener("click", () => {
 
     let hoursLeft = workHour - workedHours;
     let balanceHour = insertNewBalance_H_H(hoursLeft);
-    
+
     disableButton(hoursLeft);
     insertColor(balanceHour, inputRealized_05.value, data05);
     insertNewBalance_H_H(hoursLeft);
@@ -390,8 +390,6 @@ btnRealized_05.addEventListener("click", () => {
 
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
-    
-    
 });
 
 btnRealized_06.addEventListener("click", () => {
@@ -422,7 +420,7 @@ btnRealized_06.addEventListener("click", () => {
 
     let hoursLeft = workHour - workedHours;
     let balanceHour = insertNewBalance_H_H(hoursLeft);
-   
+
     insertColor(balanceHour, inputRealized_06.value, data06);
     insertNewBalance_H_H(hoursLeft);
     insertValueH_H(data01, inputRealized_01.value);
@@ -480,8 +478,6 @@ btnRealized_07.addEventListener("click", () => {
     insertValueH_H(data05, inputRealized_05.value);
     insertValueH_H(data06, inputRealized_06.value);
     insertValueH_H(data07, inputRealized_07.value);
-
-    console.log("horas de trabalho restantes:", hoursLeft);
 
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
@@ -559,7 +555,6 @@ btnRealized_09.addEventListener("click", () => {
 
     let balanceHour = insertNewBalance_H_H(hoursLeft);
 
-    
     insertColor(balanceHour, inputRealized_09.value, data09);
     insertNewBalance_H_H(hoursLeft);
     insertValueH_H(data01, inputRealized_01.value);

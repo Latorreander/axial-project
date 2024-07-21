@@ -14,6 +14,13 @@ body {
     font-family: sunflower, sans-serif;
 }
 
+.controls {
+
+    padding-top: 9%;
+    margin: 0 auto;
+}
+
+
 .input-radio input{
    
     margin-top: 10px;
@@ -21,13 +28,19 @@ body {
 }
 
 .input-radio  {
-    margin-top: 7%;
+    background-color: #b0c4de;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 2%;
 }
 
-form {
 
+form {
+    
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     margin: 20px 20px ;
 }
@@ -36,13 +49,27 @@ form .hours {
     display: none;
 }
 
-
-
 .table {
     text-align: center;
     width: 500px;
     height: 500px;
     margin: 0 auto;
+}
+
+
+.goal-btn {
+    background-color: #FF8C00;
+    border-radius: 5px;
+    padding: 6px;
+}
+
+ #goal {
+    border-radius: 5px;
+} 
+
+
+input[type = 'radio']{
+    accent-color: #ea612d;
 }
 
 table {

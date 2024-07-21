@@ -9,27 +9,38 @@
 <body>
 
     <main class="table">
+    <div class="controls">
+        <p>VIRADA:</p>
+        
         <div class="input-radio">
-            <p>VIRADA:</p>
-            <input type="radio" id="SIM"
-            name="option" value="8.3">
-            <label for="sim">SIM</label>
-
+            <div class="radio">
+                <input type="radio" id="SIM"
+                name="option" value="8.3">
+                <label for="sim">SIM</label>
+    
+            </div>
+          <div class="radio">
             <input type="radio" id="NÃO"
             name="option" value="7.3" checked>
             <label for="não">NÃO</label>
+          </div>
+           
         </div>
+    
 
         <form>
 
-            <label for="turn"></label>
+            <!-- <label for="turn"></label> -->
             <input class="hours" type="text" id="turn" min="7.3" max="8.3" value="7.3" disabled>
-           
-            <label for="meta">Meta:</label>
-            <input type="number" id="goal" min="3050" max="7000" step="100">
-            <button class="goal-btn">START</button>
+            <div>
+                <label for="meta">Meta:</label>
+                <input type="number" id="goal" min="3050" max="7000" step="100">
+            </div>
+        
+            <button class="goal-btn">INICIAR</button>
     
         </form>
+    </div>
          
         <table>
             <thead>
