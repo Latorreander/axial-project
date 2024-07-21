@@ -141,7 +141,6 @@ const checkWorkedHour = () => {
         data06.innerHTML = "INTERVALO";
         inputRealized_06.value = "❌";
         inputRealized_06.disabled = true;
-      
     }
 };
 
@@ -200,18 +199,30 @@ const insertValueH_H = (dataH_H, inputValue) => {
 
 const insertColor = (balance, inputValue, data) => {
     if (inputValue < balance) {
-  
-        data.style.backgroundColor = "#E6E6FA";
-        data.style.color = "#FF0000";
+        data.style.backgroundColor = "#FF6347";
+        data.style.color = "#B22222";
     } else if (inputValue >= balance) {
-        data.style.backgroundColor = "#E6E6FA";
+        data.style.backgroundColor = "#98FB98";
 
         data.style.color = "#3CB371";
-    
+    }
+};
+// função de confirmação de inserção de valor
+
+const confirmDataInclusion = () => {
+    let response = confirm("INCLUIR VALOR?");
+    if (response === false) {
+        return response;
     }
 };
 
 btnRealized_01.addEventListener("click", () => {
+    let trueOrFalse = confirmDataInclusion();
+
+    if (trueOrFalse === false) {
+        return;
+    }
+
     btnRealized_01.disabled = true;
     btnRealized_02.disabled = false;
     inputRealized_01.disabled = true;
@@ -224,7 +235,7 @@ btnRealized_01.addEventListener("click", () => {
     balanceDay = goalBalanceDay();
     workHour;
     workedHours++;
-   
+
     let hoursLeft = workHour - workedHours;
 
     let balanceHour = insertNewBalance_H_H(hoursLeft);
@@ -238,6 +249,12 @@ btnRealized_01.addEventListener("click", () => {
 });
 
 btnRealized_02.addEventListener("click", () => {
+    let trueOrFalse = confirmDataInclusion();
+
+    if (trueOrFalse === false) {
+        return;
+    }
+
     btnRealized_01.disabled = true;
     btnRealized_02.disabled = true;
     btnRealized_03.disabled = false;
@@ -264,13 +281,17 @@ btnRealized_02.addEventListener("click", () => {
     insertValueH_H(data01, inputRealized_01.value);
     insertValueH_H(data02, inputRealized_02.value);
 
-    console.log("horas de trabalho restantes:", hoursLeft);
-
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
 });
 
 btnRealized_03.addEventListener("click", () => {
+    let trueOrFalse = confirmDataInclusion();
+
+    if (trueOrFalse === false) {
+        return;
+    }
+
     btnRealized_01.disabled = true;
     btnRealized_02.disabled = true;
     btnRealized_03.disabled = true;
@@ -305,6 +326,12 @@ btnRealized_03.addEventListener("click", () => {
 });
 
 btnRealized_04.addEventListener("click", () => {
+    let trueOrFalse = confirmDataInclusion();
+
+    if (trueOrFalse === false) {
+        return;
+    }
+
     btnRealized_01.disabled = true;
     btnRealized_02.disabled = true;
     btnRealized_03.disabled = true;
@@ -348,6 +375,12 @@ const disableButton = (hoursLeft) => {
 };
 
 btnRealized_05.addEventListener("click", () => {
+    let trueOrFalse = confirmDataInclusion();
+
+    if (trueOrFalse === false) {
+        return;
+    }
+
     btnRealized_01.disabled = true;
     btnRealized_02.disabled = true;
     btnRealized_03.disabled = true;
@@ -393,6 +426,12 @@ btnRealized_05.addEventListener("click", () => {
 });
 
 btnRealized_06.addEventListener("click", () => {
+    let trueOrFalse = confirmDataInclusion();
+
+    if (trueOrFalse === false) {
+        return;
+    }
+
     btnRealized_01.disabled = true;
     btnRealized_02.disabled = true;
     btnRealized_03.disabled = true;
@@ -438,6 +477,12 @@ btnRealized_06.addEventListener("click", () => {
 });
 
 btnRealized_07.addEventListener("click", () => {
+    let trueOrFalse = confirmDataInclusion();
+
+    if (trueOrFalse === false) {
+        return;
+    }
+
     btnRealized_01.disabled = true;
     btnRealized_02.disabled = true;
     btnRealized_03.disabled = true;
@@ -485,6 +530,12 @@ btnRealized_07.addEventListener("click", () => {
 });
 
 btnRealized_08.addEventListener("click", () => {
+    let trueOrFalse = confirmDataInclusion();
+
+    if (trueOrFalse === false) {
+        return;
+    }
+
     btnRealized_01.disabled = true;
     btnRealized_02.disabled = true;
     btnRealized_03.disabled = true;
@@ -537,6 +588,12 @@ btnRealized_08.addEventListener("click", () => {
 });
 
 btnRealized_09.addEventListener("click", () => {
+    let trueOrFalse = confirmDataInclusion();
+
+    if (trueOrFalse === false) {
+        return;
+    }
+
     btnRealized_01.disabled = true;
     btnRealized_02.disabled = true;
     btnRealized_03.disabled = true;
