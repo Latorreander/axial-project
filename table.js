@@ -100,8 +100,7 @@ goalBtn.addEventListener("click", () => {
 
     workHour = Number(inputTurn.value);
     goalBtn.disabled = true;
-    // inputRealized_07.disabled = true;
-
+   
     targetDay = Number(inputTargetDay.value);
     console.log("Meta do dia:", targetDay);
 
@@ -204,13 +203,13 @@ const insertColor = (balance, inputValue, data) => {
     } else if (inputValue >= balance) {
         data.style.backgroundColor = "#98FB98";
 
-        data.style.color = "#3CB371";
+        data.style.color = "#008000";
     }
 };
 // função de confirmação de inserção de valor
 
 const confirmDataInclusion = () => {
-    let response = confirm("INCLUIR VALOR?");
+    let response = confirm("INSERIR QUANTIDADE?");
     if (response === false) {
         return response;
     }
