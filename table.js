@@ -628,6 +628,8 @@ btnRealized_09.addEventListener("click", () => {
 
     checkWorkedHour();
 
+    const y = 0
+
     showMessage(balanceDay);
 });
 
