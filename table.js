@@ -1,3 +1,4 @@
+
 const data = document.querySelectorAll(".data");
 const lastData = document.querySelector(".last-data");
 const data01 = document.getElementById("data-01");
@@ -65,6 +66,7 @@ let workHour = 0;
 let targetDay = 0;
 let totalRealized = 0;
 let balanceDay = 0;
+let goalH_H = 0;
 
 goalBtn.disabled = true;
 
@@ -662,3 +664,8 @@ const showMessage = () => {
         return;
     }
 };
+
+
+
+
+
