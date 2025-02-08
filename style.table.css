@@ -90,7 +90,6 @@ table {
     width: 500px;
     height: 100%;
     background-color: #98abc4;
-    border-radius: 5px;
 }
 
 tbody {
@@ -167,6 +166,24 @@ button {
 
  td input::-webkit-inner-spin-button {
     -webkit-appearance: none;
+}
+
+.info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #dc7b05ed;
+    background-color:;
+    font-size: 20px;
+    width: 100%;
+    height: 40px;
+    border-radius: 0 0 5px 5px;
+}
+
+.info span {
+    background-color: #fff;
+    padding: 3px;
+    border-radius: 5px;
 }
 
 

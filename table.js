@@ -1,4 +1,3 @@
-
 const data = document.querySelectorAll(".data");
 const lastData = document.querySelector(".last-data");
 const data01 = document.getElementById("data-01");
@@ -40,6 +39,7 @@ const messageDiv = document.querySelector(".message");
 const inputRadioYes = document.getElementById("SIM");
 const inputRadioNo = document.getElementById("NÃO");
 const inputRadio = document.querySelector(".input-radio");
+const displayInfo = document.querySelector(".info");
 
 btnRealized_01.disabled = true;
 btnRealized_02.disabled = true;
@@ -102,7 +102,7 @@ goalBtn.addEventListener("click", () => {
 
     workHour = Number(inputTurn.value);
     goalBtn.disabled = true;
-   
+
     targetDay = Number(inputTargetDay.value);
     console.log("Meta do dia:", targetDay);
 
@@ -247,6 +247,7 @@ btnRealized_01.addEventListener("click", () => {
 
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
+    showInfo();
 });
 
 btnRealized_02.addEventListener("click", () => {
@@ -284,6 +285,7 @@ btnRealized_02.addEventListener("click", () => {
 
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
+    showInfo();
 });
 
 btnRealized_03.addEventListener("click", () => {
@@ -324,6 +326,7 @@ btnRealized_03.addEventListener("click", () => {
 
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
+    showInfo();
 });
 
 btnRealized_04.addEventListener("click", () => {
@@ -366,6 +369,7 @@ btnRealized_04.addEventListener("click", () => {
 
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
+    showInfo();
 });
 
 const disableButton = (hoursLeft) => {
@@ -424,6 +428,7 @@ btnRealized_05.addEventListener("click", () => {
 
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
+    showInfo();
 });
 
 btnRealized_06.addEventListener("click", () => {
@@ -475,6 +480,7 @@ btnRealized_06.addEventListener("click", () => {
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
     showMessage(balanceDay);
+    showInfo();
 });
 
 btnRealized_07.addEventListener("click", () => {
@@ -528,6 +534,7 @@ btnRealized_07.addEventListener("click", () => {
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
     showMessage(balanceDay);
+    showInfo();
 });
 
 btnRealized_08.addEventListener("click", () => {
@@ -586,6 +593,7 @@ btnRealized_08.addEventListener("click", () => {
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
     showMessage(balanceDay);
+    showInfo();
 });
 
 btnRealized_09.addEventListener("click", () => {
@@ -630,10 +638,16 @@ btnRealized_09.addEventListener("click", () => {
 
     checkWorkedHour();
 
-    const y = 0
+    const y = 0;
 
     showMessage(balanceDay);
+    showInfo();
 });
+
+const showInfo = () => {
+    displayInfo.innerHTML = `<P>Produzido: <span>${totalRealized}</span></P>
+    <P>Saldo: <span>${balanceDay}</span></P>`;
+};
 
 const showMessage = () => {
     let goalRealizedText = "META ALCANÇADA";
@@ -664,8 +678,3 @@ const showMessage = () => {
         return;
     }
 };
-
-
-
-
-
