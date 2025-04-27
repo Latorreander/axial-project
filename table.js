@@ -670,7 +670,7 @@ const showInfo = (realized, goalData ) => {
     
     
     displayInfo.innerHTML = `<P>Produzido: <span>${totalRealized}</span></P>
-    <P>Saldo: <span>${balanceDay}</span></P> <P>PPM(atual): <span id="x">${ppm}</span></P> <P>PPM(Planejado): <span>${goalPpm}</span></P>`;
+    <P>Saldo: <span>${balanceDay}</span></P> <P>PPm(atual): <span id="x">${ppm}</span></P> <P>PPm(Planejado): <span>${goalPpm}</span></P>`;
 
     const idX = document.getElementById("x");
     console.log(idX)
