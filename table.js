@@ -9,6 +9,7 @@ const data06 = document.getElementById("data-06");
 const data07 = document.getElementById("data-07");
 const data08 = document.getElementById("data-08");
 const data09 = document.getElementById("data-09");
+const dataForm = document.getElementById("dataForm");
 
 const inputTargetDay = document.getElementById("goal");
 const goalBtn = document.querySelector(".goal-btn");
@@ -72,6 +73,7 @@ goalBtn.disabled = true;
 
 const inputFocus = (inputEnabled) => {
     document.getElementById(inputEnabled).focus();
+    
 };
 
 window.onbeforeunload = () => {
@@ -114,6 +116,8 @@ goalBtn.addEventListener("click", () => {
 
     calcLast20Minutes(goalH_H);
     checkWorkedHour();
+    showInfo(0, goalH_H);
+    goalPpm(goalH_H);
 });
 
 const calcLast20Minutes = (goalH_H) => {
@@ -209,7 +213,6 @@ const insertColor = (balance, inputValue, data) => {
     }
 };
 // função de confirmação de inserção de valor
-
 const confirmDataInclusion = () => {
     let response = confirm("INSERIR QUANTIDADE?");
     if (response === false) {
@@ -217,7 +220,9 @@ const confirmDataInclusion = () => {
     }
 };
 
+//eventos dos botões de confirmação
 btnRealized_01.addEventListener("click", () => {
+   
     let trueOrFalse = confirmDataInclusion();
 
     if (trueOrFalse === false) {
@@ -229,7 +234,7 @@ btnRealized_01.addEventListener("click", () => {
     inputRealized_01.disabled = true;
     inputRealized_02.disabled = false;
     inputFocus("h-h_realized_02");
-
+ 
     let totalRealized = sumH_H(inputRealized_01);
 
     console.log("Peças Produzidas:", totalRealized);
@@ -247,10 +252,13 @@ btnRealized_01.addEventListener("click", () => {
 
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
-    showInfo();
+    showInfo(inputRealized_01.value, balanceHour);
+     
 });
 
+
 btnRealized_02.addEventListener("click", () => {
+    
     let trueOrFalse = confirmDataInclusion();
 
     if (trueOrFalse === false) {
@@ -264,6 +272,7 @@ btnRealized_02.addEventListener("click", () => {
     inputRealized_01.disabled = true;
     inputRealized_02.disabled = true;
     inputRealized_03.disabled = false;
+   
     inputFocus("h-h_realized_03");
 
     let totalRealized = sumH_H(inputRealized_02);
@@ -285,7 +294,8 @@ btnRealized_02.addEventListener("click", () => {
 
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
-    showInfo();
+    showInfo(inputRealized_02.value, balanceHour);
+   
 });
 
 btnRealized_03.addEventListener("click", () => {
@@ -326,7 +336,8 @@ btnRealized_03.addEventListener("click", () => {
 
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
-    showInfo();
+    showInfo(inputRealized_03.value, balanceHour);
+    
 });
 
 btnRealized_04.addEventListener("click", () => {
@@ -369,7 +380,8 @@ btnRealized_04.addEventListener("click", () => {
 
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
-    showInfo();
+    showInfo(inputRealized_04.value, balanceHour);
+    
 });
 
 const disableButton = (hoursLeft) => {
@@ -428,7 +440,8 @@ btnRealized_05.addEventListener("click", () => {
 
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
-    showInfo();
+    showInfo(inputRealized_05.value, balanceHour);
+    
 });
 
 btnRealized_06.addEventListener("click", () => {
@@ -480,7 +493,8 @@ btnRealized_06.addEventListener("click", () => {
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
     showMessage(balanceDay);
-    showInfo();
+    showInfo(inputRealized_06.value, balanceHour);
+    
 });
 
 btnRealized_07.addEventListener("click", () => {
@@ -534,7 +548,8 @@ btnRealized_07.addEventListener("click", () => {
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
     showMessage(balanceDay);
-    showInfo();
+    showInfo(inputRealized_07.value, balanceHour);
+    
 });
 
 btnRealized_08.addEventListener("click", () => {
@@ -592,8 +607,9 @@ btnRealized_08.addEventListener("click", () => {
 
     calcLast20minH_H(balanceDay, balanceHour, hoursLeft);
     checkWorkedHour();
-    showMessage(balanceDay);
-    showInfo();
+    showMessage(balanceDay);700
+    showInfo(inputRealized_08.value, balanceHour);
+    
 });
 
 btnRealized_09.addEventListener("click", () => {
@@ -637,16 +653,36 @@ btnRealized_09.addEventListener("click", () => {
     console.log("Peças Produzidas:", totalRealized);
 
     checkWorkedHour();
-
-    const y = 0;
-
     showMessage(balanceDay);
-    showInfo();
+    showInfo(inputRealized_09.value, balanceHour);
+   
 });
 
-const showInfo = () => {
+const goalPpm = (goalData) =>{
+    return (goalData / 60).toFixed(1);
+
+}
+const showInfo = (realized, goalData ) => {
+  
+
+    const goalPpm =  (goalData / 60).toFixed(1);
+    const ppm = (realized / 60). toFixed(1); 
+    
+    
     displayInfo.innerHTML = `<P>Produzido: <span>${totalRealized}</span></P>
-    <P>Saldo: <span>${balanceDay}</span></P>`;
+    <P>Saldo: <span>${balanceDay}</span></P> <P>PPM(atual): <span id="x">${ppm}</span></P> <P>PPM(Planejado): <span>${goalPpm}</span></P>`;
+
+    const idX = document.getElementById("x");
+    console.log(idX)
+    
+    if (ppm >= goalPpm){
+        idX.style.backgroundColor="#98FB98";
+        idX.style.color="#008000"
+    }else {
+        idX.style.backgroundColor= "#FF6347";
+        idX.style.color = "#B22222";
+    }
+    displayInfo.style.display ="flex";
 };
 
 const showMessage = () => {
